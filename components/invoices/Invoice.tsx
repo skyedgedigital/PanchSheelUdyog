@@ -168,10 +168,7 @@ const Invoice = ({
             {item?.itemDescription}
           </td>{' '}
           <td className='border-[1px] border-black py-2  text-center '>
-            {items &&
-              items?.find(
-                (i) => i?.itemName?.trim() === item?.itemDescription?.trim()
-              ).itemNumber}
+            {item?.chalanNumber}
           </td>{' '}
           <td className='border-[1px] border-black py-2  text-center '>
             {/* {formatDate(filtered[i]?.date.toString())} */}
@@ -504,9 +501,7 @@ const Invoice = ({
                   alt='sign image'
                 />{' '}
               </div>
-              <h1 className='font-bold text-sm uppercase'>
-                Shekhar Enterprises
-              </h1>
+              <h1 className='font-bold text-sm uppercase'>Panchsheel Udyog</h1>
             </div>
             <div className=''>
               <p className=' border-b-2 border-b-black w-fit pr-2 pb-2'>
@@ -801,7 +796,7 @@ const Invoice = ({
                   description
                 </th>
                 <th className='border-[1px] border-black capitalize py-1 pb-2  text-center '>
-                  Item no.
+                  Chalan no.
                 </th>
                 <th className='border-[1px] border-black capitalize py-1 pb-2  text-center '>
                   date
