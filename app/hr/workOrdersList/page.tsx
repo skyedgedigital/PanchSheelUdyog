@@ -146,59 +146,82 @@ const Page = ({
   const nextYear = parseInt(searchParams.year) + 1;
 
   return (
-    <div className="ml-[80px]">
-      <div className="flex gap-2 mb-2">
+    <div className='ml-[80px]'>
+      <div className='flex gap-2 mb-2'>
         <Button onClick={handleDownloadPDF}>Download PDF</Button>
         <Button onClick={handleOnClick}>Print</Button>
       </div>
-  
+
       <div id={`Bonus-register/${searchParams.year}`} ref={contentRef}>
-        <div className="flex justify-between p-0 container left-0 right-0 overflow-hidden font-mono w-full mb-6" id="container-id">
-  
-          <div className="flex flex-col ml-4">
-            <div className="font-bold">Name of Establishment</div>
-            <div>SRI CONSTRUCTION AND CO.</div>
+        <div
+          className='flex justify-between p-0 container left-0 right-0 overflow-hidden font-mono w-full mb-6'
+          id='container-id'
+        >
+          <div className='flex flex-col ml-4'>
+            <div className='font-bold'>Name of Establishment</div>
+            <div className="uppercase">Panchsheel Udyog</div>
             <div>H.NO 78 KPLI NAGAR NEAR HARI MANDIR,</div>
           </div>
-  
-          <div className="flex flex-col gap-2 ml-16 mb-6">
-            <h1 className="font-bold underline text-center">workOrders List</h1>
+
+          <div className='flex flex-col gap-2 ml-16 mb-6'>
+            <h1 className='font-bold underline text-center'>workOrders List</h1>
             <div>{`From Date: 01-04-${searchParams.year}`}</div>
             <div>{`To Date: 30-03-${nextYear}`}</div>
           </div>
         </div>
-  
+
         {bonusData && (
-          <PDFTable className="border-2 border-black">
-            <TableHeader className="py-8 h-16 overflow-auto">
+          <PDFTable className='border-2 border-black'>
+            <TableHeader className='py-8 h-16 overflow-auto'>
               <TableRow>
-                <TableHead className="text-black border-2 border-black" colSpan={3}></TableHead>
+                <TableHead
+                  className='text-black border-2 border-black'
+                  colSpan={3}
+                ></TableHead>
               </TableRow>
-              <TableRow className="text-black h-28">
-                <TableHead className="text-black border-2 border-black">Sl No.</TableHead>
-                <TableHead className="text-black border-2 border-black">Employee Name</TableHead>
-                <TableHead className="text-black border-2 border-black">Father&apos;s Name</TableHead>
-                <TableHead className="text-black border-2 border-black">Work Orders</TableHead>
+              <TableRow className='text-black h-28'>
+                <TableHead className='text-black border-2 border-black'>
+                  Sl No.
+                </TableHead>
+                <TableHead className='text-black border-2 border-black'>
+                  Employee Name
+                </TableHead>
+                <TableHead className='text-black border-2 border-black'>
+                  Father&apos;s Name
+                </TableHead>
+                <TableHead className='text-black border-2 border-black'>
+                  Work Orders
+                </TableHead>
               </TableRow>
             </TableHeader>
-  
+
             <TableBody>
               {bonusData.map((employee, index) => {
                 const workOrderArray = calculateTotalWorkOrder(employee);
-  
+
                 return (
-                  <TableRow key={employee._id} className="h-16">
-                    <TableCell className="border-black border-2 text-black">{index + 1}</TableCell>
-                    <TableCell className="border-black border-2 text-black">{employee.employee.name}</TableCell>
-                    <TableCell className="border-black border-2 text-black">{employee.employee.fathersName}</TableCell>
-  
+                  <TableRow key={employee._id} className='h-16'>
+                    <TableCell className='border-black border-2 text-black'>
+                      {index + 1}
+                    </TableCell>
+                    <TableCell className='border-black border-2 text-black'>
+                      {employee.employee.name}
+                    </TableCell>
+                    <TableCell className='border-black border-2 text-black'>
+                      {employee.employee.fathersName}
+                    </TableCell>
+
                     {/* Mapping over workOrderArray */}
-                    <TableCell className="border-black border-2 text-black">
+                    <TableCell className='border-black border-2 text-black'>
                       {workOrderArray.map((wo, monthIndex) => {
-                        const workOrder = workOrderNumbers.find((wn) => wn._id === wo);
+                        const workOrder = workOrderNumbers.find(
+                          (wn) => wn._id === wo
+                        );
                         return (
                           <div key={monthIndex}>
-                            <div>{workOrder ? workOrder.workOrderNumber : null}</div>
+                            <div>
+                              {workOrder ? workOrder.workOrderNumber : null}
+                            </div>
                           </div>
                         );
                       })}
@@ -209,8 +232,10 @@ const Page = ({
             </TableBody>
           </PDFTable>
         )}
-  
-        {!bonusData && <div className="text-red">NO ATTENDANCE DATA AVAILABLE</div>}
+
+        {!bonusData && (
+          <div className='text-red'>NO ATTENDANCE DATA AVAILABLE</div>
+        )}
       </div>
     </div>
   );

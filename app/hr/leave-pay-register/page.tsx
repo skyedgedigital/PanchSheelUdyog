@@ -20,15 +20,17 @@ const Page = ({
   const [leaveData, setLeaveData] = useState(null);
 
   const contentRef = React.useRef(null);
- const reactToPrintFn = useReactToPrint({ contentRef,
-  documentTitle:`BonusStatement/${searchParams.year}`, })
- const handleOnClick = async () => {
-  if(!leaveData){
-    toast.error('Attendance data not available for Print generation.');
-    return;
-  }
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+    documentTitle: `BonusStatement/${searchParams.year}`,
+  });
+  const handleOnClick = async () => {
+    if (!leaveData) {
+      toast.error('Attendance data not available for Print generation.');
+      return;
+    }
     reactToPrintFn();
-};
+  };
 
   const handleDownloadPDF = async () => {
     if (!leaveData) {
@@ -122,12 +124,16 @@ const Page = ({
 
   return (
     <div className='ml-[80px] flex flex-col gap-4'>
-       <div className='flex gap-2 mb-2'>
-      <Button onClick={handleDownloadPDF}>Download PDF</Button>
-      <Button onClick={handleOnClick}>Print</Button> 
+      <div className='flex gap-2 mb-2'>
+        <Button onClick={handleDownloadPDF}>Download PDF</Button>
+        <Button onClick={handleOnClick}>Print</Button>
       </div>
 
-      <div id={`Leave-register/${searchParams.year}`} className='  ' ref={contentRef}>
+      <div
+        id={`Leave-register/${searchParams.year}`}
+        className='  '
+        ref={contentRef}
+      >
         <div
           className='gap-6  overflow-hidden font-mono left-0 right-0 text-center  px-2 font-semibold w-[1600px]'
           id='container-id'
@@ -145,7 +151,7 @@ const Page = ({
                 </div>
                 <div className='flex flex-col ml-4'>
                   {' '}
-                  <div className='text-left'>Sri construction and Co.</div>
+                  <div className='text-left'>Panchsheel Udyog</div>
                   <div className='text-left'>
                     .H.NO 78 KAPLI NEAR HARI MANDIR,
                   </div>

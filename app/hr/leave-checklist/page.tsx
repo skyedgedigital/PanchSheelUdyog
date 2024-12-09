@@ -174,7 +174,7 @@ const Page = ({
             <div className='flex flex-col flex-1'>
               <div className='flex gap-3 mb-4 '>
                 <div className=' max-w-64 uppercase'>
-                  Sri construction and co. House No 78 kapli near hari mandir,
+                  Panchsheel Udyog House No 78 kapli near hari mandir,
                   po kapali saraikea, kharsawn jharkhand
                 </div>
                 <div></div>

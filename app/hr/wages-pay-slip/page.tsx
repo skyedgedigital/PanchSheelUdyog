@@ -136,78 +136,79 @@ const Page = ({
   return (
     <div className='p-5'>
       <div className='flex gap-2 mb-2'>
-      <Button onClick={handleDownloadPDF}>Download PDF</Button>
-      <Button onClick={handleOnClick}>Print</Button> 
+        <Button onClick={handleDownloadPDF}>Download PDF</Button>
+        <Button onClick={handleOnClick}>Print</Button>
       </div>
 
-      <div ref={contentRef}
+      <div
+        ref={contentRef}
         id={`${wagesData?.existingWage?.employee?.workManNo}`}
-        className="ml-[80px] border-2 border-black p-4"
+        className='ml-[80px] border-2 border-black p-4'
       >
-        <div className=" flex justify-between pr-10">
-          <h1 className="uppercase">FOR XIX</h1>
-          <span className="uppercase">Wages slip</span>
+        <div className=' flex justify-between pr-10'>
+          <h1 className='uppercase'>FOR XIX</h1>
+          <span className='uppercase'>Wages slip</span>
           <span>[ See Rule 78 (2) (B) ]</span>
         </div>
-        <div className=" flex gap-4 my-4">
+        <div className=' flex gap-4 my-4'>
           <span>Name & Address of Contractor : </span>
-          <div className="flex flex-col">
-            <span className="uppercase font-bold">SRI CONSTRUCTION & CO.</span>
-            <span className="uppercase ">.H.NO 78 KAPLI NEAR HARI MANDIR,</span>
-            <span className="uppercase ">.PO KAPALI SARAIKEA,</span>
+          <div className='flex flex-col'>
+            <span className='uppercase font-bold'>Panchsheel Udyog</span>
+            <span className='uppercase '>.H.NO 78 KAPLI NEAR HARI MANDIR,</span>
+            <span className='uppercase '>.PO KAPALI SARAIKEA,</span>
           </div>
         </div>
-        <div className="border-t-2 border-black">
-          <h2 className="font-semibold my-2">Contract Under</h2>
-          <div className="flex justify-between">
+        <div className='border-t-2 border-black'>
+          <h2 className='font-semibold my-2'>Contract Under</h2>
+          <div className='flex justify-between'>
             <div>
-              <div className=" flex gap-2 ">
+              <div className=' flex gap-2 '>
                 <span>Name of Workman :</span>
-                <span className="uppercase font-bold">
+                <span className='uppercase font-bold'>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  {wagesData?.name}{" "}
+                  {wagesData?.name}{' '}
                 </span>
               </div>
-              <div className=" flex gap-2   ">
+              <div className=' flex gap-2   '>
                 <span>Nature & Location of Work :</span>
-                <span className="uppercase"> </span>
+                <span className='uppercase'> </span>
               </div>
-              <div className=" flex gap-2   ">
+              <div className=' flex gap-2   '>
                 <span>
                   For the Month
                   :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </span>
-                <span className="uppercase">
-                  {" "}
-                  {months[Number(wagesData?.month - 1)]} &nbsp;{" "}
+                <span className='uppercase'>
+                  {' '}
+                  {months[Number(wagesData?.month - 1)]} &nbsp;{' '}
                   {wagesData?.year}
                 </span>
               </div>
             </div>
             <div>
-              <div className=" flex gap-2  ">
+              <div className=' flex gap-2  '>
                 <span>Workman No</span>
-                <span className="uppercase font-bold">
-                  &nbsp;&nbsp;{wagesData?.existingWage?.employee?.workManNo}{" "}
+                <span className='uppercase font-bold'>
+                  &nbsp;&nbsp;{wagesData?.existingWage?.employee?.workManNo}{' '}
                 </span>
               </div>
-              <div className=" flex gap-2   ">
+              <div className=' flex gap-2   '>
                 <span>A/c No.</span>
-                <span className="uppercase font-bold">
+                <span className='uppercase font-bold'>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   {wagesData?.existingWage?.employee?.accountNumber}
                 </span>
               </div>
-              <div className=" flex gap-2   ">
+              <div className=' flex gap-2   '>
                 <span>UAN</span>
-                <span className="uppercase font-bold">
+                <span className='uppercase font-bold'>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   {wagesData?.existingWage?.employee?.UAN}
                 </span>
               </div>
-              <div className=" flex gap-2   ">
+              <div className=' flex gap-2   '>
                 <span>ESIC No.</span>
-                <span className="uppercase font-bold">
+                <span className='uppercase font-bold'>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   {wagesData?.existingWage?.employee?.ESICNo}
                 </span>
@@ -215,22 +216,22 @@ const Page = ({
             </div>
           </div>
         </div>
-        <ol className="list-decimal ml-5 my-3">
+        <ol className='list-decimal ml-5 my-3'>
           <li>
-            <span>No. of Days Worked : </span>{" "}
-            <span className="font-bold">
+            <span>No. of Days Worked : </span>{' '}
+            <span className='font-bold'>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               {wagesData?.attendance}
             </span>
           </li>
           <li>
             <span>No. of Units Worked in Case of Piece Rate of Work</span>
-            {"  : "}
+            {'  : '}
             <span>-</span>
           </li>
           <li>
-            <span>Rate of Daily Wages @ Piece Rate : </span>{" "}
-            <span className="font-bold">
+            <span>Rate of Daily Wages @ Piece Rate : </span>{' '}
+            <span className='font-bold'>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               {wagesData?.designation.basic}
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +
@@ -242,71 +243,89 @@ const Page = ({
             </span>
           </li>
           <li>
-            <span>Amount of Wages : </span>{" "}
-            <span className="font-bold">
+            <span>Amount of Wages : </span>{' '}
+            <span className='font-bold'>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {(wagesData?.designation.basic * wagesData?.attendance.find((ele)=>{return ele>0})).toFixed(
-                2
-              )}
+              {(
+                wagesData?.designation.basic *
+                wagesData?.attendance.find((ele) => {
+                  return ele > 0;
+                })
+              ).toFixed(2)}
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {(wagesData?.designation.DA * wagesData?.attendance.find((ele)=>{return ele>0}))?.toFixed(2)}
+              {(
+                wagesData?.designation.DA *
+                wagesData?.attendance.find((ele) => {
+                  return ele > 0;
+                })
+              )?.toFixed(2)}
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {(wagesData?.existingWage?.otherCash)?.toFixed(2)}{" "}
+              {wagesData?.existingWage?.otherCash?.toFixed(2)}{' '}
             </span>
           </li>
           <li>
             <span>Amount of Overtime Wages : </span> <span></span>
           </li>
           <li>
-            <span>Gross Wages Payable : </span>{" "}
-            <span className="font-bold">
+            <span>Gross Wages Payable : </span>{' '}
+            <span className='font-bold'>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               {wagesData?.existingWage?.total.toFixed(2)}
             </span>
           </li>
           <li>
-            <span>Deduction if Any Advance : <span className='font-bold'>{(wagesData?.existingWage?.advanceDeduction !=null && (wagesData?.existingWage?.advanceDeduction).toFixed(2))} </span></span>{"   "}
-            <span className="ml-6">Deduction if Any Damage : <span className='font-bold'>{(wagesData?.existingWage?.damageDeduction !=null && (wagesData?.existingWage?.damageDeduction).toFixed(2))} </span></span>{" "}
-            <span className="ml-6">PF:</span>{" "}
-            <span className="font-bold ml-6">
+            <span>
+              Deduction if Any Advance :{' '}
+              <span className='font-bold'>
+                {wagesData?.existingWage?.advanceDeduction != null &&
+                  (wagesData?.existingWage?.advanceDeduction).toFixed(2)}{' '}
+              </span>
+            </span>
+            {'   '}
+            <span className='ml-6'>
+              Deduction if Any Damage :{' '}
+              <span className='font-bold'>
+                {wagesData?.existingWage?.damageDeduction != null &&
+                  (wagesData?.existingWage?.damageDeduction).toFixed(2)}{' '}
+              </span>
+            </span>{' '}
+            <span className='ml-6'>PF:</span>{' '}
+            <span className='font-bold ml-6'>
               {(0.12 * wagesData?.existingWage?.total).toFixed(2)}
             </span>
-            <span className="ml-6">ESI:</span>
-            <span className="font-bold ml-6">
+            <span className='ml-6'>ESI:</span>
+            <span className='font-bold ml-6'>
               {(0.0075 * wagesData?.existingWage?.total).toFixed(2)}
             </span>
           </li>
-          {
-            wagesData?.existingWage?.incentiveApplicable ? (
-              <li>
-              <span>Total Incentive amount : </span>{" "}
-              <span className="font-bold">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+          {wagesData?.existingWage?.incentiveApplicable ? (
+            <li>
+              <span>Total Incentive amount : </span>{' '}
+              <span className='font-bold'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
                 {(wagesData?.existingWage?.incentiveAmount).toFixed(2)}
               </span>
             </li>
-            ) : (
-              <li>
-              <span>Total Incentive amount : </span>{" "}
-              <span className="font-bold">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
-                NA
+          ) : (
+            <li>
+              <span>Total Incentive amount : </span>{' '}
+              <span className='font-bold'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NA
               </span>
             </li>
-            )
-          }
+          )}
           <li>
-            <span>Net Amount of Wages Paid : </span>{" "}
-            <span className="font-bold">
+            <span>Net Amount of Wages Paid : </span>{' '}
+            <span className='font-bold'>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               {wagesData?.existingWage?.netAmountPaid.toFixed(2)}
             </span>
           </li>
         </ol>
 
-        <div className="my-5">Initial of Contractor or his Representative</div>
+        <div className='my-5'>Initial of Contractor or his Representative</div>
       </div>
     </div>
   );
