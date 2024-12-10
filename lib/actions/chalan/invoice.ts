@@ -442,6 +442,42 @@ const generateContinousInvocieNumber = async (): Promise<ApiResponse<any>> => {
   }
 };
 
+const deleteInvoiceById = async (id: string) => {
+  try {
+    const dbConnection = await handleDBConnection();
+    if (!dbConnection.success) return dbConnection;
+    const invoiceExist = await Invoice.find({ _id: id });
+    if (!invoiceExist) {
+      revalidatePath("/fleetmanager/invoice-management");
+      return {
+        success: false,
+        status: 200,
+        message: "Invoice does not exist",
+        data: null,
+        error: null,
+      };
+    }
+
+    await Invoice.deleteOne({ _id: id });
+    revalidatePath("/fleetmanager/invoice-management");
+    return {
+      success: true,
+      status: 204,
+      message: "Invoice Successfully Deleted",
+      data: null,
+      error: null,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      status: 500,
+      message: err.message || "Unexpected error occurred,Please try later",
+      error: JSON.stringify(err),
+      data: null,
+    };
+  }
+};
+
 export {
   updateInvoice,
   checkIfExisting,
@@ -453,4 +489,5 @@ export {
   uploadInvoiceToFireBase,
   uploadSummaryToFireBase,
   generateContinousInvocieNumber,
+  deleteInvoiceById,
 };
