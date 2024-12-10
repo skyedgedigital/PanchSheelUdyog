@@ -157,7 +157,10 @@ const Page = ({
                 <div className='font-bold text-blue-600 max-w-64 '>
                   Name and Address of Contractor:
                 </div>
-                <div>Panchsheel Udyog.</div>
+                <div>
+                  Panch Sheel - C-4,Brindawan Garden, Sonari, Jamshedpur 831011.
+                  Shekhar C-1,Brindawan Garden, Sonari, Jamshedpur 831011.
+                </div>
               </div>
               <div className='flex gap-3 mb-4'>
                 <div className='font-bold text-blue-600  '>
