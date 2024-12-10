@@ -159,8 +159,8 @@ const Page = ({
         >
           <div className='flex flex-col ml-4'>
             <div className='font-bold'>Name of Establishment</div>
-            <div className="uppercase">Panchsheel Udyog</div>
-            <div>H.NO 78 KPLI NAGAR NEAR HARI MANDIR,</div>
+            <div className='uppercase'>Panchsheel Udyog</div>
+            <div>C-4,Brindawan Garden, Sonari, Jamshedpur 831011.</div>
           </div>
 
           <div className='flex flex-col gap-2 ml-16 mb-6'>

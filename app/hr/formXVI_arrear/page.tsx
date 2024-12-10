@@ -207,103 +207,100 @@ const Page = ({
  
 
   return (
-    <div className="ml-[80px]">
-      <div className="flex gap-2 mb-2">
+    <div className='ml-[80px]'>
+      <div className='flex gap-2 mb-2'>
         <Button onClick={handleDownloadPDF}>Download PDF</Button>
         <Button onClick={handleOnClick}>Print</Button>
       </div>
 
       <div id={`${smonth}/${syear}`} ref={contentRef}>
         <div
-          className="container left-0 right-0 bg-white  overflow-hidden font-mono  w-[1300px]"
-          id="container-id"
+          className='container left-0 right-0 bg-white  overflow-hidden font-mono  w-[1300px]'
+          id='container-id'
         >
-          <div className="px-2 py-6 text-center  ">
-            <h2 className="text-xl font-bold text-blue-700   ">
-              Arrear FORM XVI{" "}
+          <div className='px-2 py-6 text-center  '>
+            <h2 className='text-xl font-bold text-blue-700   '>
+              Arrear FORM XVI{' '}
             </h2>
-            <p className="text-blue-600 font-bold mt-2 ">
+            <p className='text-blue-600 font-bold mt-2 '>
               [See rule 78 (2) (a)]
             </p>
-            <h1 className="font-bold text-blue-600">MUSTER ROLL</h1>
+            <h1 className='font-bold text-blue-600'>MUSTER ROLL</h1>
           </div>
-          <div className="flex justify-between mx-0 font-bold">
-            <div className="flex flex-col">
-              <div className="flex gap-3 mb-4 ">
-                <div className="font-bold text-blue-600 max-w-64 ">
+          <div className='flex justify-between mx-0 font-bold'>
+            <div className='flex flex-col'>
+              <div className='flex gap-3 mb-4 '>
+                <div className='font-bold text-blue-600 max-w-64 '>
                   Name and Address of Contractor:
                 </div>
                 <div>
                   Panch Sheel - C-4,Brindawan Garden, Sonari, Jamshedpur 831011.
-                  Shekhar C-1,Brindawan Garden, Sonari, Jamshedpur 831011.
                 </div>
               </div>
-              <div className="flex gap-3 mb-4">
-                <div className="font-bold text-blue-600  ">
+              <div className='flex gap-3 mb-4'>
+                <div className='font-bold text-blue-600  '>
                   Name and Location of work:
                 </div>
-                <div className="uppercase ">
+                <div className='uppercase '>
                   &nbsp;&nbsp;&nbsp;{searchParams?.location}
                 </div>
               </div>
             </div>
-            <div className="flex flex-col">
-              <div className="flex gap-3 mb-4">
-                <div className="font-bold text-blue-600 max-w-96 ">
+            <div className='flex flex-col'>
+              <div className='flex gap-3 mb-4'>
+                <div className='font-bold text-blue-600 max-w-96 '>
                   Name and Address of Establishment in/ under which Contract is
                   carried on:
                 </div>
-                <div className="uppercase">{searchParams?.employer}</div>
+                <div className='uppercase'>{searchParams?.employer}</div>
               </div>
-              <div className="flex gap-3 mb-4">
-                <div className="font-bold text-blue-600">
+              <div className='flex gap-3 mb-4'>
+                <div className='font-bold text-blue-600'>
                   Name and Address of Principal Employer:
                 </div>
-                <div className="uppercase">
+                <div className='uppercase'>
                   &nbsp;&nbsp;&nbsp;&nbsp;{searchParams?.employer}
                 </div>
               </div>
             </div>
           </div>
-          <h1 className="font-bold mb-4 text-blue-600 text-center">{`From ${sday}/${smonth}/${syear} TO ${eday}/${emonth}/${eyear}`}</h1>
+          <h1 className='font-bold mb-4 text-blue-600 text-center'>{`From ${sday}/${smonth}/${syear} TO ${eday}/${emonth}/${eyear}`}</h1>
           <div></div>
         </div>
 
         {yearlywages && (
           <div>
-            <PDFTable className="border-2 border-black  ">
-              <TableHeader className=" py-8 h-16 overflow-auto ">
+            <PDFTable className='border-2 border-black  '>
+              <TableHeader className=' py-8 h-16 overflow-auto '>
                 <TableRow>
                   <TableHead
-                    className=" text-black border-2 border-black"
+                    className=' text-black border-2 border-black'
                     colSpan={4}
-                  ></TableHead>{" "}
+                  ></TableHead>{' '}
                   {/* Empty cells to align "Dates" */}
                   <TableHead
-                    className=" text-black border-2 border-black text-center"
-                    colSpan={
-                      12
-                    }
+                    className=' text-black border-2 border-black text-center'
+                    colSpan={12}
                   >
                     Months
                   </TableHead>
                   <TableHead
-                    className=" text-black border-2 border-black"
+                    className=' text-black border-2 border-black'
                     colSpan={2}
-                  ></TableHead>{" "}
+                  ></TableHead>{' '}
                   {/* Empty cells to align after "Dates" */}
                 </TableRow>
-                <TableRow className="text-black h-28 ">
-                  <TableHead className=" text-black border-2 border-black">
+                <TableRow className='text-black h-28 '>
+                  <TableHead className=' text-black border-2 border-black'>
                     Serial No.
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Name of Worker
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Father Name
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Sex
                   </TableHead>
                   {months.map((mo, index) => {
@@ -311,22 +308,21 @@ const Page = ({
                     //   emonth > 3 ? emonth - 4 : emonth + 8;
 
                     // if (index <= adjustedEndMonth) {
-                      return (
-                        <TableHead
-                          key={index}
-                          className="border-2 border-black text-black"
-                        >
-                          {mo}
-                        </TableHead>
-                      );
-                    
+                    return (
+                      <TableHead
+                        key={index}
+                        className='border-2 border-black text-black'
+                      >
+                        {mo}
+                      </TableHead>
+                    );
                   })}
 
                   {/* Table headers for each day */}
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Total Days
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Remarks
                   </TableHead>
                 </TableRow>
@@ -335,7 +331,7 @@ const Page = ({
                 {yearlywages.map((employee, index) => {
                   let atten = 0;
                   let attenArray = calculateAttTotals(employee);
-                  console.log(attenArray,"I am attenArray")
+                  console.log(attenArray, 'I am attenArray');
                   // Aggregate the wages by month
                   const aggregatedWages = employee.wages.reduce((acc, wage) => {
                     const month = wage.month; // Assuming month is a number like 1 (January), 2 (February), etc.
@@ -360,34 +356,35 @@ const Page = ({
                   );
 
                   return (
-                    <TableRow key={employee._id} className="h-16">
-                      <TableCell className="border-black border-2 text-black">
+                    <TableRow key={employee._id} className='h-16'>
+                      <TableCell className='border-black border-2 text-black'>
                         {index + 1}
                       </TableCell>
-                      <TableCell className="border-black border-2 text-black">
+                      <TableCell className='border-black border-2 text-black'>
                         {employee.employee.name}
                       </TableCell>
-                      <TableCell className="border-black border-2 text-black">
+                      <TableCell className='border-black border-2 text-black'>
                         {employee.employee.fathersName}
                       </TableCell>
-                      <TableCell className="border-black border-2 text-black">
+                      <TableCell className='border-black border-2 text-black'>
                         {employee.employee.sex}
                       </TableCell>
                       {/* Table data for each month */}
                       {months2.map((monthName, monthIndex) => {
                         const adjustedEndMonth =
                           emonth > 3 ? emonth - 4 : emonth + 8;
-                          const adjustedStartMonth =
+                        const adjustedStartMonth =
                           smonth > 3 ? smonth - 4 : smonth + 8;
                         const aggregatedWage =
-                          monthIndex <= adjustedEndMonth && monthIndex>= adjustedStartMonth
+                          monthIndex <= adjustedEndMonth &&
+                          monthIndex >= adjustedStartMonth
                             ? aggregatedWages[monthName]
                             : null; // Retrieve the aggregated data for this month
 
                         return (
                           <TableCell
                             key={monthIndex}
-                            className="border-black border-2 text-black"
+                            className='border-black border-2 text-black'
                           >
                             <div>{aggregatedWage?.attendance}</div>
                           </TableCell>
@@ -401,14 +398,13 @@ const Page = ({
                           {attenArray.map((att, index) => {
                             atten += att; // Add the current attendance to the accumulator
                           })}
-                          
-                        
                         </>
-                       
                       }
-                       <TableCell className="border-black border-2 text-black">{atten}</TableCell>
-                       <TableCell className="border-black border-2 text-black"></TableCell>
-                       <TableCell className="border-black border-2 text-black"></TableCell>
+                      <TableCell className='border-black border-2 text-black'>
+                        {atten}
+                      </TableCell>
+                      <TableCell className='border-black border-2 text-black'></TableCell>
+                      <TableCell className='border-black border-2 text-black'></TableCell>
                     </TableRow>
                   );
                 })}
@@ -417,7 +413,7 @@ const Page = ({
           </div>
         )}
         {!yearlywages && (
-          <div className="text-red">NO ATTENDANCE DATA AVAILABLE</div>
+          <div className='text-red'>NO ATTENDANCE DATA AVAILABLE</div>
         )}
       </div>
     </div>

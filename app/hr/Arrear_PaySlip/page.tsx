@@ -233,67 +233,78 @@ console.log(totalAttendance,"I am totalAtt")
             <div
               key={`${employee?.employee?.name}-${employee?.employee?.workManNo}`}
               id={`${employee?.employee?.name}-${employee?.employee?.workManNo}`}
-              className="border-2 border-black p-2 mb-4"
+              className='border-2 border-black p-2 mb-4'
             >
-              <div className="flex justify-between pr-10">
-                <h1 className="uppercase">Arrear Wages slip</h1>
+              <div className='flex justify-between pr-10'>
+                <h1 className='uppercase'>Arrear Wages slip</h1>
                 <span>[ See Rule 78 (2) (B) ]</span>
               </div>
-  
-              <div className="flex gap-4 my-4">
+
+              <div className='flex gap-4 my-4'>
                 <span>Name & Address of Contractor :- </span>
-                <span className="uppercase">
-                  SRI CONSTRUCTION & CO. .H.NO 78 KAPLI NEAR HARI MANDIR, .PO KAPALI SARAIKEA,
+                <span className='uppercase'>
+                  panchsheel udyog C-4,Brindawan Garden, Sonari, Jamshedpur
+                  831011.
                 </span>
               </div>
-  
+
               <div>
-                <h2 className="font-semibold my-2">Contract Under</h2>
-                <div className="flex gap-52">
+                <h2 className='font-semibold my-2'>Contract Under</h2>
+                <div className='flex gap-52'>
                   <div>
-                    <div className="flex gap-2">
+                    <div className='flex gap-2'>
                       <span>Name of Workman :-</span>
-                      <span className="uppercase">{employee?.employee?.name}</span>
+                      <span className='uppercase'>
+                        {employee?.employee?.name}
+                      </span>
                     </div>
-                    <div className="flex gap-2">
+                    <div className='flex gap-2'>
                       <span>Nature & Location of Work :-</span>
-                      <span className="uppercase"></span>
+                      <span className='uppercase'></span>
                     </div>
-                    <div className="flex gap-2">
-                      <h1 className="font-bold mb-4 text-blue-600 text-center">
+                    <div className='flex gap-2'>
+                      <h1 className='font-bold mb-4 text-blue-600 text-center'>
                         {`From ${sday}/${smonth}/${syear} TO ${eday}/${emonth}/${eyear}`}
                       </h1>
                     </div>
                   </div>
                   <div>
-                    <div className="flex gap-2">
+                    <div className='flex gap-2'>
                       <span>Workman No:-</span>
-                      <span className="uppercase">{employee?.employee?.workManNo}</span>
+                      <span className='uppercase'>
+                        {employee?.employee?.workManNo}
+                      </span>
                     </div>
-                    <div className="flex gap-2">
+                    <div className='flex gap-2'>
                       <span>Account No :-</span>
-                      <span className="uppercase">{employee?.employee?.accountNumber}</span>
+                      <span className='uppercase'>
+                        {employee?.employee?.accountNumber}
+                      </span>
                     </div>
-                    <div className="flex gap-2">
+                    <div className='flex gap-2'>
                       <span>UAN :-</span>
-                      <span className="uppercase">{employee?.employee?.UAN}</span>
+                      <span className='uppercase'>
+                        {employee?.employee?.UAN}
+                      </span>
                     </div>
-                    <div className="flex gap-2">
+                    <div className='flex gap-2'>
                       <span>ESIC No :-</span>
-                      <span className="uppercase">{employee?.employee?.ESICNo}</span>
+                      <span className='uppercase'>
+                        {employee?.employee?.ESICNo}
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
-  
-              <ol className="list-decimal ml-5 my-3">
+
+              <ol className='list-decimal ml-5 my-3'>
                 <li>
                   <span>No. of Days Worked :- </span>
                   <span>{totalAttendance}</span>
                 </li>
                 <li>
                   <span>No. of Units Worked in Case of Piece Rate of Work</span>
-                  {"  :- "}
+                  {'  :- '}
                   <span>-</span>
                 </li>
                 <li>
@@ -303,9 +314,11 @@ console.log(totalAttendance,"I am totalAtt")
                 <li>
                   <span>Amount of Wages :- </span>
                   <span>
-                    {(WageDiff * totalAttendance).toFixed(2)} +{" "}
-                    {(daStatus?Number(employee?.employee?.designation_details[0]?.DA):0) * totalAttendance} +{" "}
-                    {otherCash}
+                    {(WageDiff * totalAttendance).toFixed(2)} +{' '}
+                    {(daStatus
+                      ? Number(employee?.employee?.designation_details[0]?.DA)
+                      : 0) * totalAttendance}{' '}
+                    + {otherCash}
                   </span>
                 </li>
                 <li>
@@ -318,7 +331,8 @@ console.log(totalAttendance,"I am totalAtt")
                 <li>
                   <span>Deduction if Any Advance :- </span>
                   <span>
-                    P.F : {pfDeduction.toFixed(2)} E.S.I : {esiDeduction.toFixed(2)}
+                    P.F : {pfDeduction.toFixed(2)} E.S.I :{' '}
+                    {esiDeduction.toFixed(2)}
                   </span>
                 </li>
                 <li>
@@ -326,8 +340,10 @@ console.log(totalAttendance,"I am totalAtt")
                   <span>{netWages.toFixed(2)}</span>
                 </li>
               </ol>
-  
-              <div className="my-5">Initial of Contractor or his Representative</div>
+
+              <div className='my-5'>
+                Initial of Contractor or his Representative
+              </div>
             </div>
           );
         })}

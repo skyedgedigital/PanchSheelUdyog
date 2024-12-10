@@ -150,10 +150,9 @@ const Page = ({
 
   return (
     <div className='ml-[80px]'>
-     
-     <div className='flex gap-2 mb-2'>
-      <Button onClick={handleDownloadPDF}>Download PDF</Button>
-      <Button onClick={handleOnClick}>Print</Button>
+      <div className='flex gap-2 mb-2'>
+        <Button onClick={handleDownloadPDF}>Download PDF</Button>
+        <Button onClick={handleOnClick}>Print</Button>
       </div>
 
       <div
@@ -161,25 +160,24 @@ const Page = ({
         className='flex flex-col gap-4'
         ref={contentRef}
       >
-        
         <div
           className='container left-0 right-0  overflow-hidden font-mono w-full border-[1px] border-gray-900 pb-4'
           id='container-id'
         >
-
           <div className='px-2 py-6 text-center  '>
-            <h1 className='text-xl  underline  uppercase font-bold'>muster roll</h1>
+            <h1 className='text-xl  underline  uppercase font-bold'>
+              muster roll
+            </h1>
           </div>
           <div className='flex justify-between w-full gap-6 text-sm ml-0 mr-20  '>
             <div className='flex flex-col flex-1'>
               <div className='flex gap-3 mb-4 '>
                 <div className=' max-w-64 uppercase'>
-                  Panchsheel Udyog House No 78 kapli near hari mandir,
-                  po kapali saraikea, kharsawn jharkhand
+                  Panchsheel Udyog C-4,Brindawan Garden, Sonari, Jamshedpur
+                  831011.
                 </div>
                 <div></div>
               </div>
-            
             </div>
             <div className='flex flex-1 gap-4'>
               <div className='flex gap-3 mb-4'>
@@ -194,16 +192,15 @@ const Page = ({
               </div>
             </div>
             <div className='flex flex-col flex-1'>
-                <div className=' text-right mb-2'>
-                  Name and Address of the Contractor In under which Establishment
-                  is carried on
-                </div>
-                <div className='text-right'>Tata Steel UISL</div>
-             
-                <div className='text-right'>
-                  Name and Address of Principal Employer
-                </div>
-           
+              <div className=' text-right mb-2'>
+                Name and Address of the Contractor In under which Establishment
+                is carried on
+              </div>
+              <div className='text-right'>Tata Steel UISL</div>
+
+              <div className='text-right'>
+                Name and Address of Principal Employer
+              </div>
             </div>
           </div>
           <div className='flex justify-between '>
@@ -303,121 +300,88 @@ const Page = ({
                   }
                   return acc;
                 }, {});
-                return(
-                <TableRow key={employee._id} className='h-16'>
-                  <TableCell className='border-black border-[1px] text-black'>
-                    {index + 1}
-                  </TableCell>
-                  <TableCell className='border-black border-[1px] text-black'>
-                    {employee.employee.name}
-                  </TableCell>
-                  <TableCell className='border-black border-[1px] text-black'>
-                    {employee.employee.fathersName}
-                  </TableCell>
-                  <TableCell className='border-black border-[1px] text-black'>
-                    {employee.employee.sex}
-                  </TableCell>
+                return (
+                  <TableRow key={employee._id} className='h-16'>
+                    <TableCell className='border-black border-[1px] text-black'>
+                      {index + 1}
+                    </TableCell>
+                    <TableCell className='border-black border-[1px] text-black'>
+                      {employee.employee.name}
+                    </TableCell>
+                    <TableCell className='border-black border-[1px] text-black'>
+                      {employee.employee.fathersName}
+                    </TableCell>
+                    <TableCell className='border-black border-[1px] text-black'>
+                      {employee.employee.sex}
+                    </TableCell>
+                    {/* Table data for each day (status) */}
+                    {months2.map((month, monthIndex) => {
+                      console.log(aggregatedWages, 'I am aggregatedWages');
+                      const aggregatedWage = aggregatedWages[month];
+                      return (
+                        <TableCell
+                          key={monthIndex}
+                          className='border-black border text-black'
+                        >
+                          {aggregatedWage?.attendance || 0}
+                        </TableCell>
+                      );
+                    })}
+
+                    <TableCell className='border-black border-[1px] text-black'>
+                      {employee.totalAttendance}
+                    </TableCell>
+                    <TableCell className='border-black border-[1px] text-black'>
+                      {employee.EL}
+                    </TableCell>
+                    <TableCell className='border-black border-[1px] text-black'>
+                      {employee.CL}
+                    </TableCell>
+                    <TableCell className='border-black border-[1px] text-black'>
+                      {employee.FL}
+                    </TableCell>
+                    <TableCell className='border-black border-[1px] text-black'>
+                      {employee.tot}
+                    </TableCell>
+                    <TableCell className='border-black border-[1px] text-black'></TableCell>
+                  </TableRow>
+                );
+              })}
+              {leaveData?.length > 0 && (
+                <TableRow className='h-16'>
+                  <TableCell className='border-black border-[1px] text-black'></TableCell>
+                  <TableCell className='border-black border-[1px] text-black'></TableCell>
+                  <TableCell className='border-black border-[1px] text-black'></TableCell>
+                  <TableCell className='border-black border-[1px] text-black'></TableCell>
                   {/* Table data for each day (status) */}
-                  {months2.map((month, monthIndex) => {
-                        console.log(aggregatedWages, "I am aggregatedWages");
-                        const aggregatedWage = aggregatedWages[month];
-                        return (
-                          <TableCell
-                            key={monthIndex}
-                            className="border-black border text-black"
-                          >
-                           {aggregatedWage?.attendance || 0}
-                          </TableCell>
-                          
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
+                  <TableCell className='border-black border-[1px] text-black '></TableCell>
 
-                        );
-                      })}
-
+                  <TableCell className='border-black border-[1px] text-black'></TableCell>
                   <TableCell className='border-black border-[1px] text-black'>
-                    {employee.totalAttendance}
+                    {totalEL}
                   </TableCell>
                   <TableCell className='border-black border-[1px] text-black'>
-                    {employee.EL}
+                    {totalCL}
                   </TableCell>
                   <TableCell className='border-black border-[1px] text-black'>
-                    {employee.CL}
+                    {totalFL}
                   </TableCell>
                   <TableCell className='border-black border-[1px] text-black'>
-                    {employee.FL}
-                  </TableCell>
-                  <TableCell className='border-black border-[1px] text-black'>
-                    {employee.tot}
+                    {total}
                   </TableCell>
                   <TableCell className='border-black border-[1px] text-black'></TableCell>
                 </TableRow>
-                )
-              })}
-              {leaveData?.length>0 && (
-                <TableRow  className='h-16'>
-                <TableCell className='border-black border-[1px] text-black'>
-                </TableCell>
-                <TableCell className='border-black border-[1px] text-black'>
-                </TableCell>
-                <TableCell className='border-black border-[1px] text-black'>
-                </TableCell>
-                <TableCell className='border-black border-[1px] text-black'>
-                </TableCell>
-                {/* Table data for each day (status) */}
-                  <TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell>
-                  <TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell><TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell><TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell><TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell><TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell><TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell><TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell><TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell><TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell><TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell><TableCell
-                    className='border-black border-[1px] text-black '
-                  >
-                  </TableCell>
-
-                <TableCell className='border-black border-[1px] text-black'>
-                </TableCell>
-                <TableCell className='border-black border-[1px] text-black'>
-                  {totalEL}
-                </TableCell>
-                <TableCell className='border-black border-[1px] text-black'>
-                  {totalCL}
-                </TableCell>
-                <TableCell className='border-black border-[1px] text-black'>
-                  {totalFL}
-                </TableCell>
-                <TableCell className='border-black border-[1px] text-black'>
-                  {total}
-                </TableCell>
-                <TableCell className='border-black border-[1px] text-black'></TableCell>
-              </TableRow>
               )}
             </TableBody>
           </PDFTable>

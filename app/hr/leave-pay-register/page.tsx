@@ -153,7 +153,7 @@ const Page = ({
                   {' '}
                   <div className='text-left'>Panchsheel Udyog</div>
                   <div className='text-left'>
-                    .H.NO 78 KAPLI NEAR HARI MANDIR,
+                    C-4,Brindawan Garden, Sonari, Jamshedpur 831011.
                   </div>
                   <div className='text-left'>.PO KAPALI SARAIKEA,</div>
                 </div>

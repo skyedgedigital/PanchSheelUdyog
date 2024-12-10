@@ -256,7 +256,7 @@ const Page = ({
           <div className='flex flex-col gap-3 mb-4 '>
             <div className='font-semibold flex gap-2  mb-6 '>
               <span>Vendor&apos;s Name =</span>
-              <span className='uppercase'> Sri construction and Co. </span>
+              <span className='uppercase'>Panchsheel Udyog </span>
             </div>
 
             <div className='flex gap-52'>

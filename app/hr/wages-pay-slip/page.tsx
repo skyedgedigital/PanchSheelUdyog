@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Button } from '@/components/ui/button';
 import toast from 'react-hot-toast';
@@ -14,10 +14,10 @@ import {
   TableHeader,
   TableRow,
   PDFTable,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 
-import React, { useEffect, useState } from "react";
-import { FLOAT } from "html2canvas/dist/types/css/property-descriptors/float";
+import React, { useEffect, useState } from 'react';
+import { FLOAT } from 'html2canvas/dist/types/css/property-descriptors/float';
 
 const Page = ({
   searchParams,
@@ -35,8 +35,8 @@ const Page = ({
 
         setWagesData(data);
       } catch (error) {
-        toast.error("Internal Server Error");
-        console.log("Internal Server Error:", error);
+        toast.error('Internal Server Error');
+        console.log('Internal Server Error:', error);
       }
     };
     fn();
@@ -45,34 +45,36 @@ const Page = ({
   // Array of days (1 to 31)
 
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
-   
+
   const contentRef = React.useRef(null);
- const reactToPrintFn = useReactToPrint({ contentRef,
-  documentTitle:`BonusStatement/${searchParams.year}`, })
- const handleOnClick = async () => {
-  if(!wagesData){
-    toast.error('Attendance data not available for Print generation.');
-    return;
-  }
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+    documentTitle: `BonusStatement/${searchParams.year}`,
+  });
+  const handleOnClick = async () => {
+    if (!wagesData) {
+      toast.error('Attendance data not available for Print generation.');
+      return;
+    }
     reactToPrintFn();
-};
+  };
 
   const handleDownloadPDF = async () => {
     if (!wagesData) {
-      toast.error("Attendance data not available for PDF generation.");
+      toast.error('Attendance data not available for PDF generation.');
       return;
     }
 
@@ -80,20 +82,19 @@ const Page = ({
   };
 
   const generatePDF = async (wagesData) => {
-    const pdf = new jsPDF("l", "pt", "a4"); // Create a landscape PDF
+    const pdf = new jsPDF('l', 'pt', 'a4'); // Create a landscape PDF
     const ogId = `${wagesData?.existingWage?.employee?.workManNo}`;
-    console.log("siiiiiii", wagesData);
+    console.log('siiiiiii', wagesData);
 
     // Get the original HTML element and clone it
     const originalElement = document.getElementById(ogId)!;
     const tableElement = originalElement.cloneNode(true) as HTMLElement;
 
-
     // Apply custom styles for better alignment in the PDF
-    tableElement.style.width = "1250px";
+    tableElement.style.width = '1250px';
 
     // Create a style block to fix the alignment of numbered lists with flexbox
-    const style = document.createElement("style");
+    const style = document.createElement('style');
     style.innerHTML = `
       ol {
         padding-left: 0; /* Remove default padding */
@@ -115,21 +116,19 @@ const Page = ({
       }
     `;
 
-
     // Append the style to the cloned tableElement
     tableElement.appendChild(style);
-
 
     // Render the HTML content to the PDF
     pdf.html(tableElement, {
       callback: async () => {
         pdf.save(`${ogId}.pdf`);
-        const pdfDataUrl = pdf.output("dataurlstring");
+        const pdfDataUrl = pdf.output('dataurlstring');
       },
       x: 10,
       y: 10,
       html2canvas: { scale: 0.6 },
-      autoPaging: "text",
+      autoPaging: 'text',
     });
   };
 
@@ -154,7 +153,9 @@ const Page = ({
           <span>Name & Address of Contractor : </span>
           <div className='flex flex-col'>
             <span className='uppercase font-bold'>Panchsheel Udyog</span>
-            <span className='uppercase '>.H.NO 78 KAPLI NEAR HARI MANDIR,</span>
+            <span className='uppercase '>
+              C-4,Brindawan Garden, Sonari, Jamshedpur 831011.
+            </span>
             <span className='uppercase '>.PO KAPALI SARAIKEA,</span>
           </div>
         </div>

@@ -135,8 +135,8 @@ const Page = ({
         <>Generate FORMXVII</>
       </Button>
       <div className='flex gap-2 mb-2'>
-      <Button onClick={handleDownloadPDF}>Download PDF</Button>
-      <Button onClick={handleOnClick}>Print</Button> 
+        <Button onClick={handleDownloadPDF}>Download PDF</Button>
+        <Button onClick={handleOnClick}>Print</Button>
       </div>
 
       <div id={`${searchParams.month}/${searchParams.year}`} ref={contentRef}>
@@ -158,8 +158,8 @@ const Page = ({
                   Name and Address of Contractor:
                 </div>
                 <div>
-                  Panch Sheel - C-4,Brindawan Garden, Sonari, Jamshedpur 831011.
-                  Shekhar C-1,Brindawan Garden, Sonari, Jamshedpur 831011.
+                  Panchsheel Udyog - C-4,Brindawan Garden, Sonari, Jamshedpur
+                  831011.
                 </div>
               </div>
               <div className='flex gap-3 mb-4'>
@@ -276,8 +276,8 @@ const Page = ({
                         {employee.days.find((d) => d.day === day)?.status ===
                         'Present'
                           ? 'P'
-                          //@ts-ignore
-                          : 'A' || '-'}
+                          : //@ts-ignore
+                            'A' || '-'}
                       </TableCell>
                     ))}
                     <TableCell className='border-black border-2 text-black'>

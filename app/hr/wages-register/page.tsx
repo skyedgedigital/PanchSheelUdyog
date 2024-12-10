@@ -173,8 +173,8 @@ const Page = ({
             <div className='flex gap-4 my-4'>
               <span>Name & Address of Contractor :- </span>
               <span className='uppercase'>
-                Shekhar Enterprises .H.NO 78 KAPLI NEAR HARI MANDIR, .PO KAPALI
-                SARAIKEA,
+                Panchsheel Udyog C-4,Brindawan Garden, Sonari, Jamshedpur
+                831011.
               </span>
             </div>
             <div>

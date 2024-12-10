@@ -248,7 +248,7 @@ const Page = ({
   console.log(modifiedBonusData, "I am modifiedBonusData");
   return (
     <div>
-      <div className="flex gap-2 mb-2">
+      <div className='flex gap-2 mb-2'>
         <Button onClick={handleDownloadPDF}>Download PDF</Button>
         <Button onClick={handleOnClick}>Print</Button>
       </div>
@@ -258,34 +258,34 @@ const Page = ({
       <h1 className='mb-4 text-center'>Leave CheckList</h1>
       </div> */}
         <div
-          className="flex container left-0 right-0  overflow-hidden font-mono w-full border-2 border-black mb-6"
-          id="container-id"
+          className='flex container left-0 right-0  overflow-hidden font-mono w-full border-2 border-black mb-6'
+          id='container-id'
         >
-          <div className="flex flex-col">
-            <div>SRI CONSTRUCTION AND CO.</div>
-            <div>H.NO 78 KPLI NAGAR NEAR HARI MANDIR,</div>
+          <div className='flex flex-col'>
+            <div>Panchsheel Udyog.</div>
+            <div>C-4,Brindawan Garden, Sonari, Jamshedpur 831011.</div>
 
             <div>.PO KAPALI SARAIKEA,</div>
 
             <div>.KHARSWAN JHARKHAND.</div>
           </div>
 
-          <div className="flex flex-col gap-2 ml-16 mb-6 ">
-            <h1 className="font-bold underline">Bonus Register Checklist</h1>
+          <div className='flex flex-col gap-2 ml-16 mb-6 '>
+            <h1 className='font-bold underline'>Bonus Register Checklist</h1>
 
-            <div className="">
+            <div className=''>
               {`From Date:`}&nbsp;&nbsp;&nbsp;&nbsp;
               {`01-04-${searchParams.year}`}
             </div>
-            <div className="">
+            <div className=''>
               {`To Date:`}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               {`30-03-${nextYear}`}
             </div>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className='flex flex-col gap-2'>
             <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
             <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            <div className="ml-16">
+            <div className='ml-16'>
               {`Order Number:`}&nbsp;&nbsp;&nbsp;&nbsp;{`${searchParams.wog}`}
             </div>
           </div>
@@ -293,77 +293,77 @@ const Page = ({
 
         {bonusData && (
           <>
-            {" "}
-            <PDFTable className="border-2 border-black  ">
-              <TableHeader className=" py-8 h-16 overflow-auto ">
-                <TableRow className="text-black h-28 ">
-                  <TableHead className=" text-black border-2 border-black">
+            {' '}
+            <PDFTable className='border-2 border-black  '>
+              <TableHeader className=' py-8 h-16 overflow-auto '>
+                <TableRow className='text-black h-28 '>
+                  <TableHead className=' text-black border-2 border-black'>
                     Sl No.
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     W. No.
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Employee Name
                   </TableHead>
                   {/* Table headers for each day */}
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Apr
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     May
                   </TableHead>
 
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Jun
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Jul
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Aug
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Sep
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Oct
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Nov
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Dec
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Jan
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Feb
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Mar
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Arrear
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Total
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     PayRate
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black">
+                  <TableHead className=' text-black border-2 border-black'>
                     Days Worked
                   </TableHead>
-                  <TableHead className=" text-black border-2 border-black font-bold">
+                  <TableHead className=' text-black border-2 border-black font-bold'>
                     Bonus
                   </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {bonusData.map((employee, index) => {
-                  let workOrderArray = calculateTotalWorkOrder2(employee)
+                  let workOrderArray = calculateTotalWorkOrder2(employee);
                   // Calculate aggregated wages per employee per month
                   const aggregatedWages = employee.wages.reduce((acc, wage) => {
                     if (acc[wage.month]) {
@@ -387,99 +387,98 @@ const Page = ({
                   );
 
                   return (
-                    <TableRow key={employee._id} className="h-16">
-                      <TableCell className="border-black border-2 text-black">
+                    <TableRow key={employee._id} className='h-16'>
+                      <TableCell className='border-black border-2 text-black'>
                         {index + 1}
                       </TableCell>
-                      <TableCell className="border-black border-2 text-black">
+                      <TableCell className='border-black border-2 text-black'>
                         {employee.employee.workManNo}
                       </TableCell>
-                      <TableCell className="border-black border-2 text-black">
+                      <TableCell className='border-black border-2 text-black'>
                         {employee.employee.name}
                       </TableCell>
-                      
+
                       {/* Render aggregated data for each month */}
                       {months2.map((month, monthIndex) => {
-                        console.log(aggregatedWages, "I am aggregatedWages");
+                        console.log(aggregatedWages, 'I am aggregatedWages');
                         const aggregatedWage = aggregatedWages[month];
                         return (
                           <TableCell
                             key={monthIndex}
-                            className="border-black border-2 text-black"
+                            className='border-black border-2 text-black'
                           >
                             <div>{aggregatedWage?.attendance || 0}</div>
                             <div>
                               {aggregatedWage?.netAmountPaid.toFixed(2) ||
-                                "0.00"}
+                                '0.00'}
                             </div>
-                            <TableCaption className="border-t-2 py-2 text-black border-gray-400">{`Wo:${workOrderArray[monthIndex]}`}</TableCaption>
-                          
+                            <TableCaption className='border-t-2 py-2 text-black border-gray-400'>{`Wo:${workOrderArray[monthIndex]}`}</TableCaption>
                           </TableCell>
-                          
-
                         );
                       })}
 
-                      <TableCell className="border-black border-2 text-black">
+                      <TableCell className='border-black border-2 text-black'>
                         -
                       </TableCell>
-                      <TableCell className="border-black border-2 text-black">
+                      <TableCell className='border-black border-2 text-black'>
                         {employee.totalNetAmountPaid.toFixed(2)}
                       </TableCell>
-                      <TableCell className="border-black border-2 text-black">
+                      <TableCell className='border-black border-2 text-black'>
                         {employee.employee.designation_details[0].PayRate}
                       </TableCell>
-                      <TableCell className="border-black border-2 text-black">
+                      <TableCell className='border-black border-2 text-black'>
                         {employee.totalAttendance}
                       </TableCell>
-                      <TableCell className="border-black border-2 text-black">
+                      <TableCell className='border-black border-2 text-black'>
                         {employee.bonus.toFixed(2)}
                       </TableCell>
                     </TableRow>
                   );
                 })}
 
-                <TableRow className="h-16">
-                  <TableCell className="border-black border-2 text-black"></TableCell>
-                  <TableCell className="border-black border-2 text-black"></TableCell>
-                  <TableCell className="border-black border-2 text-black"></TableCell>
+                <TableRow className='h-16'>
+                  <TableCell className='border-black border-2 text-black'></TableCell>
+                  <TableCell className='border-black border-2 text-black'></TableCell>
+                  <TableCell className='border-black border-2 text-black'></TableCell>
                   {/* Table data for each day (status) */}
                   {attTotals.map((wage, index) => (
-                    <TableCell key={index} className="border-black border-2 text-black">
+                    <TableCell
+                      key={index}
+                      className='border-black border-2 text-black'
+                    >
                       <div>{wage}</div>
                     </TableCell>
-                    
                   ))}
 
-                  <TableCell className="border-black border-2 text-black">
+                  <TableCell className='border-black border-2 text-black'>
                     -
                   </TableCell>
-                  <TableCell className="border-black border-2 text-black"></TableCell>
-                  <TableCell className="border-black border-2 text-black"></TableCell>
-                  <TableCell className="border-black border-2 text-black"></TableCell>
-                  <TableCell className="border-black border-2 text-black font-bold">
+                  <TableCell className='border-black border-2 text-black'></TableCell>
+                  <TableCell className='border-black border-2 text-black'></TableCell>
+                  <TableCell className='border-black border-2 text-black'></TableCell>
+                  <TableCell className='border-black border-2 text-black font-bold'>
                     {calculateBonusTotals(bonusData)}
                   </TableCell>
                 </TableRow>
-                <TableRow className="h-10">
-                  <TableCell className="border-black border-2 text-black">
+                <TableRow className='h-10'>
+                  <TableCell className='border-black border-2 text-black'>
                     Work Orders Total
                   </TableCell>
-                  <TableCell className="border-black border-2 text-black"></TableCell>
-                  <TableCell className="border-black border-2 text-black"></TableCell>
+                  <TableCell className='border-black border-2 text-black'></TableCell>
+                  <TableCell className='border-black border-2 text-black'></TableCell>
                   {totalWorkOrder.map((wo, index) => (
-                    <TableCell key={index} className="border-2 border-black">
-                      <div >{wo}</div>
+                    <TableCell key={index} className='border-2 border-black'>
+                      <div>{wo}</div>
                     </TableCell>
                   ))}
                 </TableRow>
               </TableBody>
             </PDFTable>
-            <div className="mt-4 font-bold">
+            <div className='mt-4 font-bold'>
               {/* First line: April to August */}
-              <div className="grid grid-cols-5 gap-4">
+              <div className='grid grid-cols-5 gap-4'>
                 {monthlyTotals.slice(0, 5).map((total, index) => (
-                  <div key={index} className=" p-2 text-left capitalize">
+                  <div key={index} className=' p-2 text-left capitalize'>
                     {`${months[index]}`}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     {`${total}`}
@@ -487,9 +486,9 @@ const Page = ({
                 ))}
               </div>
               {/* Second line: September to January */}
-              <div className="grid grid-cols-5 gap-4 mt-2 ">
+              <div className='grid grid-cols-5 gap-4 mt-2 '>
                 {monthlyTotals.slice(5, 10).map((total, index) => (
-                  <div key={index} className=" p-2 text-left capitalize ">
+                  <div key={index} className=' p-2 text-left capitalize '>
                     {`${months[index + 5]}`}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     {`${total}`}
@@ -497,26 +496,26 @@ const Page = ({
                 ))}
               </div>
               {/* Third line: February and March */}
-              <div className="grid grid-cols-5 gap-4 mt-2 capitalize">
+              <div className='grid grid-cols-5 gap-4 mt-2 capitalize'>
                 {monthlyTotals.slice(10, 12).map((total, index) => (
-                  <div key={index} className=" p-2 text-left">
+                  <div key={index} className=' p-2 text-left'>
                     {`${months[index + 10]}`}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     {`${total}`}
                   </div>
                 ))}
-                <div className=" p-2 text-left capitalize">
+                <div className=' p-2 text-left capitalize'>
                   {`Arrear`}
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   {`0.00`}
                 </div>
-                <div className=" p-2 text-left">{`Arrear`}</div>
+                <div className=' p-2 text-left'>{`Arrear`}</div>
               </div>
             </div>
           </>
         )}
         {!bonusData && (
-          <div className="text-red">NO ATTENDANCE DATA AVAILABLE</div>
+          <div className='text-red'>NO ATTENDANCE DATA AVAILABLE</div>
         )}
       </div>
     </div>

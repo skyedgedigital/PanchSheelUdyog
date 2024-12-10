@@ -490,7 +490,7 @@ const PublicHealthServiceInvoice = ({
                 Equipments (F-15 Crane and JCB)
               </p>
               <p className='uppercase pt-2'>
-                Address: C-1, BRINDAWAN GARDEN, SONARI, JAMSHEDPUR-831011
+                Address: C-4, Brindawan Garden, Sonari, Jamshedpur 831011.
               </p>
               <p>Mobile : 9431133471, 9234973465</p>
               <p>Email : shekharenter@gmail.com</p>
