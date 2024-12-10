@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from '../ui/button';
 import { MdOutlineFileDownload } from 'react-icons/md';
 import toast from 'react-hot-toast';
@@ -24,6 +24,7 @@ import {
 import { storage } from '@/utils/fireBase/config';
 import itemAction from '@/lib/actions/item/itemAction';
 import chalanAction from '@/lib/actions/chalan/chalanAction';
+import { useReactToPrint } from "react-to-print";
 
 const todayDate = () => {
   let date = new Date().toLocaleDateString();
@@ -58,7 +59,14 @@ const Invoice = ({
 
   const [itemsList, setItemsList] = useState([]);
   const [dateMapping, setDateMapping] = useState({});
-
+  const contentInvoiceRef = useRef(null);
+  const reactToPrintFnInvoice = useReactToPrint({
+    contentRef: contentInvoiceRef,
+  });
+  const contentSummaryRef = useRef(null);
+  const reactToPrintFnSummary = useReactToPrint({
+    contentRef: contentSummaryRef,
+  });
   console.log('ITEMS', items);
 
   useEffect(() => {
@@ -485,6 +493,13 @@ const Invoice = ({
     <main className=' w-full flex flex-col gap-1 p-4 pt-20'>
       <div className='flex justify-between items-center pr-6 '>
         <Button
+          onClick={() => {
+            reactToPrintFnInvoice();
+          }}
+        >
+          Print Invoice
+        </Button>
+        <Button
           onClick={(e) => {
             e.preventDefault();
             generateAndUploadInvoicePDF();
@@ -500,6 +515,7 @@ const Invoice = ({
         <div
           className=' border-[1px] border-gray-700  tracking-wider w-full  text-[0.75rem] font-semibold'
           id={`${invoice?.invoiceId}`}
+          ref={contentInvoiceRef}
         >
           <div className='w-full   flex flex-col gap-3 my-3 ml-4'>
             <div className='flex items-center gap-2'>
@@ -772,6 +788,13 @@ const Invoice = ({
 
       <div className='mt-10 flex justify-between items-center pr-6 '>
         <Button
+          onClick={() => {
+            reactToPrintFnSummary();
+          }}
+        >
+          Print Summary Sheet
+        </Button>
+        <Button
           onClick={(e) => {
             e.preventDefault();
             generateAndUploadInvoiceSummaryPDF();
@@ -787,6 +810,7 @@ const Invoice = ({
         <div
           id={`${invoice?.invoiceId}-summary`}
           className='flex flex-col justify-center items-center w-full '
+          ref={contentSummaryRef}
         >
           <h2 className='text-center font-bold mb-4 text-base flex gap-1 mx-auto '>
             Invoice no.{' '}
