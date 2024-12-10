@@ -24,7 +24,7 @@ const Page = ({
 }: {
   searchParams: { [key: string]: string };
 }) => {
-  const [wagesData, setWagesData] = useState(null);
+  const [wagesData, setWagesData] = useState([]);
 
   // useEffect(() => {
   //   const fn = async () => {
@@ -47,41 +47,43 @@ const Page = ({
   useEffect(() => {
     const fn = async () => {
       try {
-        setWagesData(null);
-       const month = parseInt(searchParams.month)
-       const workOrder= searchParams.wo
-       const Year = parseInt(searchParams.year)
+        setWagesData([]);
+        const month = parseInt(searchParams.month);
+        const workOrder = searchParams.wo;
+        const Year = parseInt(searchParams.year);
         // console.log('shaiaiijsjs', data);
         // const filter = await JSON.stringify(data);
 
-        const response = await wagesAction.FETCH.fetchFilledWages(month,Year,workOrder);
+        const response = await wagesAction.FETCH.fetchFilledWages(
+          month,
+          Year,
+          workOrder
+        );
         //   console.log(JSON.parse(response.data))
         if (response?.success) {
-            toast.success(response.message);
-            const responseData = JSON.parse(response.data);
-            const parsedData = responseData.map((item) => ({
-              ...item, // Spread operator to copy existing properties
-              otherCashDescription: JSON.parse(item.otherCashDescription),
-              otherDeductionDescription: JSON.parse(
-                item.otherDeductionDescription
-              ),
-            }));
-        setWagesData(parsedData);
+          toast.success(response.message);
+          const responseData = JSON.parse(response.data);
+          const parsedData = responseData.map((item) => ({
+            ...item, // Spread operator to copy existing properties
+            otherCashDescription: JSON.parse(item.otherCashDescription),
+            otherDeductionDescription: JSON.parse(
+              item.otherDeductionDescription
+            ),
+          }));
+          setWagesData(parsedData);
 
-        console.log('aagya response',parsedData);
-      } else {
-        const errobj = await JSON.parse(response?.error);
-        const mess = errobj.message ? errobj.message : 'Kya yaar';
-        console.error('arrree muaa', JSON.parse(response?.error));
-        console.error('arrree miiaa', mess);
-        console.error('arrree minniaa', errobj);
-        // console.error('arrree wuuuu', response.error);
+          console.log('aagya response', parsedData);
+        } else {
+          const errobj = await JSON.parse(response?.error);
+          const mess = errobj.message ? errobj.message : 'Kya yaar';
+          console.error('arrree muaa', JSON.parse(response?.error));
+          console.error('arrree miiaa', mess);
+          console.error('arrree minniaa', errobj);
+          // console.error('arrree wuuuu', response.error);
 
-        toast.error(response.message);
-      }
-    }
-      
-      catch (error) {
+          toast.error(response.message);
+        }
+      } catch (error) {
         toast.error('Internal Server Error');
         console.error('Internal Server Error:', error);
       }
@@ -104,17 +106,18 @@ const Page = ({
     'December',
   ];
 
-
   const contentRef = React.useRef(null);
-  const reactToPrintFn = useReactToPrint({ contentRef,
-   documentTitle:`BonusStatement/${searchParams.year}`, })
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+    documentTitle: `BonusStatement/${searchParams.year}`,
+  });
   const handleOnClick = async () => {
-   if(!wagesData){
-     toast.error('Attendance data not available for Print generation.');
-     return;
-   }
-     reactToPrintFn();
- };
+    if (!wagesData) {
+      toast.error('Attendance data not available for Print generation.');
+      return;
+    }
+    reactToPrintFn();
+  };
   const handleDownloadPDF = async () => {
     if (!wagesData) {
       toast.error('Attendance data not available for PDF generation.');
@@ -127,7 +130,7 @@ const Page = ({
   const generatePDF = async (wagesData) => {
     const pdf = new jsPDF('l', 'pt', 'a4'); // Create a landscape PDF
     const ogId = `Wages-Register`;
-   console.log("siiiiiii",wagesData)
+    console.log('siiiiiii', wagesData);
     // Create a container element to hold the content and table
 
     const originalElement = document.getElementById(ogId)!;
@@ -170,7 +173,7 @@ const Page = ({
             <div className='flex gap-4 my-4'>
               <span>Name & Address of Contractor :- </span>
               <span className='uppercase'>
-                Panchsheel Udyog .H.NO 78 KAPLI NEAR HARI MANDIR, .PO KAPALI
+                Shekhar Enterprises .H.NO 78 KAPLI NEAR HARI MANDIR, .PO KAPALI
                 SARAIKEA,
               </span>
             </div>
@@ -234,8 +237,8 @@ const Page = ({
               <li>
                 <span>Amount of Wages :- </span>{' '}
                 <span>
-                  {(wage?.designation.basic * wage?.attendance).toFixed(2)} +
-                  {(wage?.designation.DA * wage?.attendance).toFixed(2)} +
+                  {(wage?.designation?.basic * wage?.attendance).toFixed(2)} +
+                  {(wage?.designation?.DA * wage?.attendance).toFixed(2)} +
                   {(wage?.otherCash).toFixed(2)}
                 </span>
               </li>
