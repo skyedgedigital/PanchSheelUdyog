@@ -22,6 +22,7 @@ import { fetchAllAttendance } from '@/lib/actions/attendance/fetch';
 import React, { useEffect, useState } from 'react';
 import WorkOrderHrAction from '@/lib/actions/HR/workOrderHr/workOrderAction';
 import { backgroundClip } from 'html2canvas/dist/types/css/property-descriptors/background-clip';
+import * as XLSX from 'xlsx';
 
 const Page = ({
   searchParams,
@@ -173,6 +174,38 @@ const Page = ({
 
   const days = Array.from({ length: 31 }, (_, i) => i + 1); // Array of days (1 to 31)
 
+  const exportToExcelHandler = async () => {
+    console.log('first');
+    const excelReportTitle = `Bank Statement for year: ${searchParams.year} month: ${searchParams.month} department: ${searchParams.dept}`;
+    const rowsForTitle = [[excelReportTitle], []];
+    const worksheetData = attendanceData.map((employee, index) => {
+      return {
+        'Sl No.': index + 1,
+        'W.M. Sl.No.': employee.employee.workManNo || '',
+        'Name of Workman.': employee.employee.name || '',
+        'Bank A/c': employee.employee.accountNumber || '',
+        'IFSC Code': employee.employee.bank.ifsc || 0,
+        Amount: Math.round(employee.netAmountPaid.toFixed(2)),
+      };
+    });
+    const combinedExcelRows = rowsForTitle.concat(
+      XLSX.utils.sheet_to_json(XLSX.utils.json_to_sheet(worksheetData), {
+        header: 1,
+      })
+    );
+
+    const worksheet = XLSX.utils.aoa_to_sheet(combinedExcelRows);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Bank Statement');
+    XLSX.writeFile(
+      workbook,
+      `Bank_Statement_${searchParams.month || ''}_${
+        searchParams.year || ''
+      }.xlsx`
+    );
+    toast.success('Export Completed');
+  };
+
   return (
     <div>
       <div className='flex gap-2 mb-2'>
@@ -216,7 +249,7 @@ const Page = ({
           <div className='flex justify-between left-0  ml-0 mb-10 p-8'>
             <div className='flex flex-col '>
               {' '}
-              {/* <div className=' font-bold'>SRI CONSTRUCTION AND CO.</div>
+              {/* <div className=' font-bold'>Shekhar Enterprises.</div>
               <div className=' '>.H.NO 78 KAPLI NEAR HARI MANDIR,</div>
               <div className=' '>.PO KAPALI SARAIKEA,</div>
               <div className=' '>.KHARSWAN JHARKHAND.</div>{' '} */}
@@ -229,6 +262,17 @@ const Page = ({
             </div>
           </div>
         </div>
+
+        {attendanceData?.length > 0 && (
+          <div>
+            <Button
+              className='mt-4 mb-4 py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 mr-auto'
+              onClick={exportToExcelHandler}
+            >
+              Export to Excel
+            </Button>
+          </div>
+        )}
 
         {attendanceData && (
           <div>
@@ -260,30 +304,33 @@ const Page = ({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {attendanceData.map((employee, index) => employee.employee && (
-                  <TableRow key={employee._id} className=' h-16 '>
-                    <TableCell className='border-black border-2 text-black text-lg '>
-                      {index + 1}
-                    </TableCell>
-                    <TableCell className='border-black border-2 text-black text-lg'>
-                      {employee.employee.workManNo}
-                    </TableCell>
+                {attendanceData.map(
+                  (employee, index) =>
+                    employee.employee && (
+                      <TableRow key={employee._id} className=' h-16 '>
+                        <TableCell className='border-black border-2 text-black text-lg '>
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className='border-black border-2 text-black text-lg'>
+                          {employee.employee.workManNo}
+                        </TableCell>
 
-                    <TableCell className='border-black border-2 text-black text-lg'>
-                      {employee.employee.name}
-                    </TableCell>
-                    {/* Table data for each day (status) */}
-                    <TableCell className='border-black border-2 text-black text-lg'>
-                      {employee.employee.accountNumber}
-                    </TableCell>
-                    <TableCell className='border-black border-2 text-black text-lg'>
-                      {employee.employee.bank.ifsc}
-                    </TableCell>
-                    <TableCell className='border-black border-2 text-black text-lg'>
-                      {employee.netAmountPaid.toFixed(2)}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                        <TableCell className='border-black border-2 text-black text-lg'>
+                          {employee.employee.name}
+                        </TableCell>
+                        {/* Table data for each day (status) */}
+                        <TableCell className='border-black border-2 text-black text-lg'>
+                          {employee.employee.accountNumber}
+                        </TableCell>
+                        <TableCell className='border-black border-2 text-black text-lg'>
+                          {employee.employee.bank.ifsc}
+                        </TableCell>
+                        <TableCell className='border-black border-2 text-black text-lg'>
+                          {Math.round(employee.netAmountPaid.toFixed(2))}
+                        </TableCell>
+                      </TableRow>
+                    )
+                )}
               </TableBody>
             </PDFTable>
           </div>
