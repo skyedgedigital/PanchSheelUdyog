@@ -158,12 +158,13 @@ const Page = ({
   function CalculateNationalHolidays(arr: Attendance[]) {
     let count_nh = 0;
     arr.forEach((item) => {
-      if (item.status === "NH") {
+      if (item.status === 'NH') {
         count_nh++;
       }
     });
     return count_nh;
   }
+
   function findAttendanceByEmployeeId(id: string) {
     const employee = attendance.find((item) => item.employeeId === id);
     if (!employee) {
@@ -201,7 +202,11 @@ const Page = ({
                 <div className='font-bold text-blue-600 max-w-64'>
                   Name and Address of Contractor:
                 </div>
-                <div>Sri construction and Co.</div>
+                <div>
+                  {' '}
+                  Shekhar Enterprises, Shekhar C-1,Brindawan Garden, Sonari,
+                  Jamshedpur 831011.
+                </div>
               </div>
               <div className='flex gap-3 mb-4'>
                 <div className='font-bold text-blue-600'>
@@ -258,13 +263,13 @@ const Page = ({
               <TableHead className='text-black border-2 border-black'>
                 Employee Name
               </TableHead>
-              <TableHead className="text-black border-2 border-black">
+              <TableHead className='text-black border-2 border-black'>
                 Emp. Code
               </TableHead>
-              <TableHead className="text-black border-2 border-black">
+              <TableHead className='text-black border-2 border-black'>
                 Present Days
               </TableHead>
-              <TableHead className="text-black border-2 border-black">
+              <TableHead className='text-black border-2 border-black'>
                 NH
               </TableHead>
               <TableHead className='text-black border-2 border-black'>
@@ -312,13 +317,13 @@ const Page = ({
                 <TableCell className='border-black border-2 text-black'>
                   {employee.employee?.name}
                 </TableCell>
-                <TableCell className="border-black border-2 text-black">
+                <TableCell className='border-black border-2 text-black'>
                   {employee.employee?.code}
                 </TableCell>
-                <TableCell className="border-black border-2 text-black">
+                <TableCell className='border-black border-2 text-black'>
                   {employee?.attendance}
                 </TableCell>
-                <TableCell className="border-black border-2 text-black">
+                <TableCell className='border-black border-2 text-black'>
                   {CalculateNationalHolidays(
                     findAttendanceByEmployeeId(employee.employee._id)
                   )}
