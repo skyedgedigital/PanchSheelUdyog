@@ -279,7 +279,7 @@ const Page = ({
                       {employee?.attendance}
                     </TableCell>
                     <TableCell className='border-black border-2 text-black'>
-                      {(employee?.total).toFixed(2)}
+                      {Math.round(employee?.total).toFixed(2)}
                     </TableCell>
                   </TableRow>
                 ))}
