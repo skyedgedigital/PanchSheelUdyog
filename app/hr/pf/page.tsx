@@ -309,10 +309,7 @@ const Page = ({
                     </TableCell>
                     {/* Table data for each day (status) */}
                     <TableCell className='border-black border-2 text-black'>
-                      {(employee?.total >= 15000
-                        ? 15000
-                        : employee?.total
-                      ).toFixed(2)}
+                      {(employee?.total).toFixed(2)}
                     </TableCell>
                     <TableCell className='border-black border-2 text-black'>
                       {(employee?.total >= 15000
