@@ -166,9 +166,7 @@ const Page = ({
       return {
         UAN: employee?.employee?.UAN || '',
         'Employee Name': employee?.employee?.name || '',
-        'EPF Wages 1': Math.round(
-          employee?.total >= 15000 ? 15000 : employee?.total
-        ).toFixed(2),
+        'EPF Wages 1': Math.round(employee?.total).toFixed(2),
         'EPF Wages 2': Math.round(
           employee?.total >= 15000 ? 15000 : employee.total
         ).toFixed(2),
