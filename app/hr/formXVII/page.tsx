@@ -346,7 +346,7 @@ const Page = ({
                       {employee?.employee.name}
                     </TableCell>
                     <TableCell className='border-black border-2 text-black'>
-                      {employee?.employee.code}
+                      {employee?.employee.workManNo}
                     </TableCell>
                     {/* Table data for each day (status) */}
                     <TableCell className='border-black border-2 text-black'>
@@ -529,7 +529,7 @@ const Page = ({
                   {Math.round(
                     calculateTotal(
                       attendanceData?.map((item) =>
-                        Number(item?.designation?.basic)
+                        Number(item?.designation.basic * item?.attendance)
                       )
                     )
                   ).toFixed(2)}
