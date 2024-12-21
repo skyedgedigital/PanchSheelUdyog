@@ -374,7 +374,7 @@ const Page = ({
                         {`${employee?.designation.basic} + ${employee?.designation.DA}`}
                       </div>
                       <div className='border-t-2 border-black text-left mt-1'>
-                        {employee?.designation.PayRate}
+                        {Number(employee?.designation.PayRate).toFixed(2)}
                       </div>
                     </TableCell>
                     <TableCell className='border-black border-2 text-black'>
@@ -541,7 +541,7 @@ const Page = ({
                   {Math.round(
                     calculateTotal(
                       attendanceData?.map((item) =>
-                        Number(item?.designation.DA)
+                        Number(item?.designation.DA * item?.attendance)
                       )
                     )
                   ).toFixed(2)}
