@@ -1,12 +1,12 @@
-'use client'
-"use client";
+'use client';
+'use client';
 
-import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
-import { Separator } from "@/components/ui/separator";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import { useReactToPrint } from "react-to-print";
+import { Button } from '@/components/ui/button';
+import toast from 'react-hot-toast';
+import { Separator } from '@/components/ui/separator';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { useReactToPrint } from 'react-to-print';
 import {
   Table,
   TableBody,
@@ -15,12 +15,14 @@ import {
   TableHeader,
   TableRow,
   PDFTable,
-} from "@/components/ui/table";
-import wagesAction from "@/lib/actions/HR/wages/wagesAction";
-import WorkOrderHrAction from "@/lib/actions/HR/workOrderHr/workOrderAction";
+} from '@/components/ui/table';
+import wagesAction from '@/lib/actions/HR/wages/wagesAction';
+import WorkOrderHrAction from '@/lib/actions/HR/workOrderHr/workOrderAction';
 
-import React, { useEffect, useState } from "react";
-import { parse } from "path";
+import React, { useEffect, useState } from 'react';
+import { parse } from 'path';
+import { fetchEnterpriseInfo } from '@/lib/actions/enterprise';
+import { IEnterprise } from '@/interfaces/enterprise.interface';
 
 const Page = ({
   searchParams,
@@ -33,12 +35,30 @@ const Page = ({
   const [totalNetAmountPaidSum, setTotalNetAmountPaidSum] = useState(0);
   const [totalBonusSum, setTotalBonusSum] = useState(0);
   const [workOrderNumbers, setWorkOrderNumbers] = useState(null);
+  const [ent, setEnt] = useState<IEnterprise | null>(null);
 
   const contentRef = React.useRef(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
+  useEffect(() => {
+    const fn = async () => {
+      const resp = await fetchEnterpriseInfo();
+      console.log('response we got ', resp);
+      if (resp.data) {
+        const inf = await JSON.parse(resp.data);
+        setEnt(inf);
+        console.log(ent);
+      }
+      if (!resp.success) {
+        toast.error(
+          `Failed to load enterprise details, Please Reload or try later. ERROR : ${resp.error}`
+        );
+      }
+    };
+    fn();
+  }, []);
   const handleOnClick = async () => {
     if (!bonusData) {
-      toast.error("Attendance data not available for Print generation.");
+      toast.error('Attendance data not available for Print generation.');
       return;
     }
     reactToPrintFn();
@@ -46,15 +66,14 @@ const Page = ({
 
   const handleDownloadPDF = async () => {
     if (!bonusData) {
-      toast.error("Attendance data not available for PDF generation.");
+      toast.error('Attendance data not available for PDF generation.');
       return;
     }
 
     await generatePDF(bonusData);
-    
   };
   const generatePDF = async (bonusData) => {
-    const pdf = new jsPDF("l", "pt", "a4"); // Create a landscape PDF
+    const pdf = new jsPDF('l', 'pt', 'a4'); // Create a landscape PDF
     const ogId = `Bonus-register/${searchParams.year}`;
 
     // Create a container element to hold the content and table
@@ -63,30 +82,28 @@ const Page = ({
     console.log(tableElement);
 
     // Append the table to the container element
-    tableElement.style.width = "1250px";
-    tableElement.style.fontSize = "24px";
+    tableElement.style.width = '1250px';
+    tableElement.style.fontSize = '24px';
 
     pdf.html(tableElement, {
       callback: async () => {
         pdf.save(`${ogId}.pdf`);
-        const pdfDataUrl = pdf.output("dataurlstring");
+        const pdfDataUrl = pdf.output('dataurlstring');
       },
       x: 10,
       y: 90, // Adjust the y position to accommodate the heading
       html2canvas: { scale: 0.6 },
-      autoPaging: "text",
+      autoPaging: 'text',
     });
   };
   const calculateTotalWorkOrder = (employee) => {
     // Initialize an array to hold the count for each month (12 months)
-    let workOrderArray = new Array()
+    let workOrderArray = new Array();
 
     // Loop through each wage entry for the employee
     employee.wages.forEach((wage) => {
-
       if (wage.workOrderHr && !workOrderArray.includes(wage.workOrderHr)) {
-          workOrderArray.push(wage.workOrderHr) 
-        
+        workOrderArray.push(wage.workOrderHr);
       }
     });
 
@@ -104,15 +121,15 @@ const Page = ({
           workOrder: searchParams.workOrder,
           bonusPercentage: 0, // we are only intrested in employee data
         };
-        console.log("We are searchParams",searchParams)
-        console.log("shaiaiijsjs", data);
+        console.log('We are searchParams', searchParams);
+        console.log('shaiaiijsjs', data);
         const filter = await JSON.stringify(data);
         console.log(filter);
 
         const response = await wagesAction.FETCH.fetchWagesForFinancialYear(
           filter
         );
-       
+
         // const error = workOrderResp.error
         // const data = JSON.parse(workOrderResp.data)
 
@@ -127,18 +144,18 @@ const Page = ({
         if (success) {
           const workOrderNumbers = JSON.parse(workOrderResp.data);
           setWorkOrderNumbers(workOrderNumbers);
-          console.log("yeraaaa wowowowwoncjd", workOrderNumbers);
+          console.log('yeraaaa wowowowwoncjd', workOrderNumbers);
         } else {
-          toast.error("Can not fetch work order numbers!");
+          toast.error('Can not fetch work order numbers!');
         }
 
         const responseData = JSON.parse(response.data);
         setBonusData(responseData);
-        console.log("response aagya bawa", responseData);
-        console.log("aagya response");
+        console.log('response aagya bawa', responseData);
+        console.log('aagya response');
       } catch (error) {
-        toast.error("Internal Server Error");
-        console.log("Internal Server Error:", error);
+        toast.error('Internal Server Error');
+        console.log('Internal Server Error:', error);
       }
     };
     fn();
@@ -159,8 +176,22 @@ const Page = ({
         >
           <div className='flex flex-col ml-4'>
             <div className='font-bold'>Name of Establishment</div>
-            <div className='uppercase'>Panchsheel Udyog</div>
-            <div>C-4,Brindawan Garden, Sonari, Jamshedpur 831011.</div>
+            <div>
+              {ent?.name ? (
+                ent?.name
+              ) : (
+                <span className='text-red-500'>
+                  No company found. Try by Reloading
+                </span>
+              )}
+              {ent?.address ? (
+                ent?.address
+              ) : (
+                <span className='text-red-500'>
+                  No address found. Try by Reloading
+                </span>
+              )}
+            </div>
           </div>
 
           <div className='flex flex-col gap-2 ml-16 mb-6'>
@@ -239,6 +270,6 @@ const Page = ({
       </div>
     </div>
   );
-}  
+};
 
-export default Page
+export default Page;

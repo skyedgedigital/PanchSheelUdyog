@@ -18,6 +18,8 @@ import {
 import wagesAction from '@/lib/actions/HR/wages/wagesAction';
 
 import React, { useEffect, useState } from 'react';
+import { IEnterprise } from '@/interfaces/enterprise.interface';
+import { fetchEnterpriseInfo } from '@/lib/actions/enterprise';
 
 const Page = ({
   searchParams,
@@ -30,14 +32,33 @@ const Page = ({
   const [totalCL, setTotalCL] = useState(0);
   const [totalFL, setTotalFL] = useState(0);
   const [total, setTotal] = useState(0);
+  const [ent, setEnt] = useState<IEnterprise | null>(null);
 
   const contentRef = React.useRef(null);
- const reactToPrintFn = useReactToPrint({ contentRef,
-  documentTitle:`BonusStatement/${searchParams.year}`, })
- const handleOnClick = React.useCallback(() => {
-  reactToPrintFn();
-}, [reactToPrintFn]);
-
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+    documentTitle: `BonusStatement/${searchParams.year}`,
+  });
+  const handleOnClick = React.useCallback(() => {
+    reactToPrintFn();
+  }, [reactToPrintFn]);
+  useEffect(() => {
+    const fn = async () => {
+      const resp = await fetchEnterpriseInfo();
+      console.log('response we got ', resp);
+      if (resp.data) {
+        const inf = await JSON.parse(resp.data);
+        setEnt(inf);
+        console.log(ent);
+      }
+      if (!resp.success) {
+        toast.error(
+          `Failed to load enterprise details, Please Reload or try later. ERROR : ${resp.error}`
+        );
+      }
+    };
+    fn();
+  }, []);
   const handleDownloadPDF = async () => {
     if (!leaveData) {
       toast.error('Attendance data not available for PDF generation.');
@@ -47,31 +68,27 @@ const Page = ({
     await generatePDF(leaveData);
   };
 
-
   useEffect(() => {
     if (leaveData && leaveData.length > 0) {
       // Step 2: Calculate sums using reduce
       const totalAttendance = leaveData.reduce(
-        (acc, employee) => acc + employee.EL, 
+        (acc, employee) => acc + employee.EL,
         0
       );
       const totalNetAmountPaid = leaveData.reduce(
-        (acc, employee) => acc + employee.CL, 
+        (acc, employee) => acc + employee.CL,
         0
       );
       const totalBonus = leaveData.reduce(
-        (acc, employee) => acc + employee.FL, 
+        (acc, employee) => acc + employee.FL,
         0
       );
-      const totall = leaveData.reduce(
-        (acc, employee) => acc + employee.tot, 
-        0
-      );
+      const totall = leaveData.reduce((acc, employee) => acc + employee.tot, 0);
       // Step 3: Update state with the calculated sums
       setTotalEL(totalAttendance);
       setTotalCL(totalNetAmountPaid);
       setTotalFL(totalBonus);
-      setTotal(totall)
+      setTotal(totall);
     }
   }, [leaveData]);
 
@@ -108,8 +125,7 @@ const Page = ({
         const data = {
           // @ts-ignore
           year: parseInt(searchParams.year),
-          workOrder:searchParams.wo
-
+          workOrder: searchParams.wo,
         };
         console.log('shaiaiijsjs', data);
         const filter = await JSON.stringify(data);
@@ -146,7 +162,7 @@ const Page = ({
     'nov',
     'dec',
   ];
-  const months2 = [1,2,3,4,5,6,7,8,9,10,11,12]
+  const months2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
     <div className='ml-[80px]'>
@@ -173,10 +189,22 @@ const Page = ({
             <div className='flex flex-col flex-1'>
               <div className='flex gap-3 mb-4 '>
                 <div className=' max-w-64 uppercase'>
-                  Panchsheel Udyog C-4,Brindawan Garden, Sonari, Jamshedpur
-                  831011.
+                  {ent?.name ? (
+                    ent?.name
+                  ) : (
+                    <span className='text-red-500'>
+                      No company found. Try by Reloading
+                    </span>
+                  )}
+                  ,&nbsp;
+                  {ent?.address ? (
+                    ent?.address
+                  ) : (
+                    <span className='text-red-500'>
+                      No address found. Try by Reloading
+                    </span>
+                  )}
                 </div>
-                <div></div>
               </div>
             </div>
             <div className='flex flex-1 gap-4'>

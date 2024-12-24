@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
-import { Separator } from "@/components/ui/separator";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import { Button } from '@/components/ui/button';
+import toast from 'react-hot-toast';
+import { Separator } from '@/components/ui/separator';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import {
   Table,
   TableBody,
@@ -15,12 +15,14 @@ import {
   PDFTable,
   TableFooter,
   TableCaption,
-} from "@/components/ui/table";
-import wagesAction from "@/lib/actions/HR/wages/wagesAction";
-import { useReactToPrint } from "react-to-print";
+} from '@/components/ui/table';
+import wagesAction from '@/lib/actions/HR/wages/wagesAction';
+import { useReactToPrint } from 'react-to-print';
 
-import React, { useEffect, useState } from "react";
-import WorkOrderHr from "@/lib/models/HR/workOrderHr.model";
+import React, { useEffect, useState } from 'react';
+import WorkOrderHr from '@/lib/models/HR/workOrderHr.model';
+import { fetchEnterpriseInfo } from '@/lib/actions/enterprise';
+import { IEnterprise } from '@/interfaces/enterprise.interface';
 
 const Page = ({
   searchParams,
@@ -32,22 +34,40 @@ const Page = ({
   const [attTotals, setAttTotals] = useState([]);
   const [modifiedBonusData, setModifiedBonusData] = useState([]);
   const [totalWorkOrder, setTotalWorkOrder] = useState([]);
+  const [ent, setEnt] = useState<IEnterprise | null>(null);
 
   const contentRef = React.useRef(null);
+  useEffect(() => {
+    const fn = async () => {
+      const resp = await fetchEnterpriseInfo();
+      console.log('response we got ', resp);
+      if (resp.data) {
+        const inf = await JSON.parse(resp.data);
+        setEnt(inf);
+        console.log(ent);
+      }
+      if (!resp.success) {
+        toast.error(
+          `Failed to load enterprise details, Please Reload or try later. ERROR : ${resp.error}`
+        );
+      }
+    };
+    fn();
+  }, []);
   const reactToPrintFn = useReactToPrint({
     contentRef,
     documentTitle: `BonusStatement/${searchParams.year}`,
   });
   const handleOnClick = async () => {
     if (!bonusData) {
-      toast.error("Attendance data not available for Print generation.");
+      toast.error('Attendance data not available for Print generation.');
       return;
     }
     reactToPrintFn();
   };
   const handleDownloadPDF = async () => {
     if (!bonusData) {
-      toast.error("Attendance data not available for PDF generation.");
+      toast.error('Attendance data not available for PDF generation.');
       return;
     }
 
@@ -55,7 +75,7 @@ const Page = ({
   };
 
   const generatePDF = async (bonusData) => {
-    const pdf = new jsPDF("l", "pt", "a4"); // Create a landscape PDF
+    const pdf = new jsPDF('l', 'pt', 'a4'); // Create a landscape PDF
     const ogId = `Bonus-checklist/${searchParams.year}`;
 
     // Create a container element to hold the content and table
@@ -65,17 +85,17 @@ const Page = ({
 
     // Append the table to the container element
 
-    tableElement.style.width = "1250px";
+    tableElement.style.width = '1250px';
 
     pdf.html(tableElement, {
       callback: async () => {
         pdf.save(`${ogId}.pdf`);
-        const pdfDataUrl = pdf.output("dataurlstring");
+        const pdfDataUrl = pdf.output('dataurlstring');
       },
       x: 10,
       y: 10,
       html2canvas: { scale: 0.6 },
-      autoPaging: "text",
+      autoPaging: 'text',
     });
   };
 
@@ -96,7 +116,7 @@ const Page = ({
       });
     });
 
-    console.log(monthlyTotals, "netAmount vala"); // Debugging: Check the totals for each month
+    console.log(monthlyTotals, 'netAmount vala'); // Debugging: Check the totals for each month
 
     // Convert each total to a string with two decimal places (toFixed(2))
     return monthlyTotals.map((total) => total.toFixed(2));
@@ -117,7 +137,7 @@ const Page = ({
       });
     });
 
-    console.log(monthlyTotals, "monthlyTotals"); // Check the result
+    console.log(monthlyTotals, 'monthlyTotals'); // Check the result
 
     // Return the aggregated attendance for all months
     return monthlyTotals;
@@ -140,14 +160,14 @@ const Page = ({
   const calculateTotalWorkOrder = (employees) => {
     // Initialize an array to hold the count for each month (12 months)
     let workOrderArray = new Array(12).fill(0);
-  
+
     // Loop through each employee's wages
     employees.forEach((employee) => {
       // Loop through each wage entry for the employee
       employee.wages.forEach((wage) => {
         // Calculate the correct month index (Apr = 0, May = 1, ..., Mar = 11)
         const monthIndex = (wage.month - 4 + 12) % 12;
-  
+
         // Check if 'workOrderHr' exists and is not an empty string
         if (wage.workOrderHr && wage.workOrderHr.trim() !== '') {
           // Increment the count for the corresponding month
@@ -155,22 +175,21 @@ const Page = ({
         }
       });
     });
-  
-    console.log(workOrderArray, "workOrderArray"); 
-  
-    
+
+    console.log(workOrderArray, 'workOrderArray');
+
     return workOrderArray;
   };
 
   const calculateTotalWorkOrder2 = (employee) => {
     // Initialize an array to hold the count for each month (12 months)
     let workOrderArray = new Array(12).fill(0);
-  
+
     // Loop through each wage entry for the employee
     employee.wages.forEach((wage) => {
       // Calculate the correct month index (Apr = 0, May = 1, ..., Mar = 11)
       const monthIndex = (wage.month - 4 + 12) % 12;
-  
+
       // Check if 'workOrderHr' exists and is not an empty string
       if (wage.workOrderHr && wage.workOrderHr.trim() !== '') {
         // Check if workOrderHr has already been counted for the current month
@@ -183,12 +202,11 @@ const Page = ({
         }
       }
     });
-  
-    console.log(workOrderArray, "workOrderArray");
-  
+
+    console.log(workOrderArray, 'workOrderArray');
+
     return workOrderArray;
   };
-  
 
   useEffect(() => {
     const fn = async () => {
@@ -200,52 +218,52 @@ const Page = ({
           workOrder: searchParams.wo,
           bonusPercentage: parseFloat(searchParams.bp),
         };
-        console.log("shaiaiijsjs", data);
+        console.log('shaiaiijsjs', data);
         const filter = await JSON.stringify(data);
 
         const response = await wagesAction.FETCH.fetchWagesForFinancialYear(
           filter
         );
         //   console.log(JSON.parse(response.data))
-        console.log("yahaaan tak are kya");
+        console.log('yahaaan tak are kya');
         const responseData = JSON.parse(response.data);
         setBonusData(responseData);
         setMonthlyTotals(calculateMonthlyTotals(responseData));
         setAttTotals(calculateAttTotals(responseData));
         setTotalWorkOrder(calculateTotalWorkOrder(responseData));
 
-        console.log("response aagya bawa", responseData);
-        console.log("aagya response");
+        console.log('response aagya bawa', responseData);
+        console.log('aagya response');
       } catch (error) {
-        toast.error("Internal Server Error");
-        console.log("Internal Server Error:", error);
+        toast.error('Internal Server Error');
+        console.log('Internal Server Error:', error);
       }
     };
 
     fn();
   }, []);
-  console.log("sahi h bhai");
+  console.log('sahi h bhai');
 
   const days = Array.from({ length: 31 }, (_, i) => i + 1); // Array of days (1 to 31)
   const months = [
-    "Apr",
-    "May",
-    "Jun",
-    "jul",
-    "aug",
-    "sep",
-    "oct",
-    "nov",
-    "dec",
-    "jan",
-    "feb",
-    "mar",
+    'Apr',
+    'May',
+    'Jun',
+    'jul',
+    'aug',
+    'sep',
+    'oct',
+    'nov',
+    'dec',
+    'jan',
+    'feb',
+    'mar',
   ];
   const months2 = [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3];
 
   const nextYear = parseInt(searchParams.year) + 1;
 
-  console.log(modifiedBonusData, "I am modifiedBonusData");
+  console.log(modifiedBonusData, 'I am modifiedBonusData');
   return (
     <div>
       <div className='flex gap-2 mb-2'>
@@ -262,12 +280,23 @@ const Page = ({
           id='container-id'
         >
           <div className='flex flex-col'>
-            <div>Panchsheel Udyog.</div>
-            <div>C-4,Brindawan Garden, Sonari, Jamshedpur 831011.</div>
-
-            <div>.PO KAPALI SARAIKEA,</div>
-
-            <div>.KHARSWAN JHARKHAND.</div>
+            {ent?.name ? (
+              <div className='uppercase'>{ent?.name}</div>
+            ) : (
+              <div className='text-red-500'>
+                {' '}
+                No company found. Try by Reloading
+              </div>
+            )}
+            ,&nbsp;
+            {ent?.address ? (
+              <div>{ent?.address}</div>
+            ) : (
+              <div className='text-red-500'>
+                {' '}
+                No address found. Try by Reloading
+              </div>
+            )}
           </div>
 
           <div className='flex flex-col gap-2 ml-16 mb-6 '>
