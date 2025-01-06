@@ -189,7 +189,7 @@ const Page = ({
                 <div className='font-bold text-blue-600 max-w-64 '>
                   Name and Address of Contractor:
                 </div>
-                <div>
+                <div className=' max-w-96 '>
                   {ent?.name ? (
                     ent?.name
                   ) : (
