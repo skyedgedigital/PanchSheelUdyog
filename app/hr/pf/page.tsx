@@ -237,33 +237,33 @@ const Page = ({
       return {
         UAN: employee?.employee?.UAN || '',
         'Employee Name': employee?.employee?.name || '',
-        'EPF Wages 1': Math.round(calculateTotal(employee)).toFixed(2),
+        'EPF Wages 1': Math.round(calculateTotal(employee)),
         'EPF Wages 2': Math.round(
           calculateTotal(employee) >= 15000 ? 15000 : calculateTotal(employee)
-        ).toFixed(2),
+        ),
         'EPS Wages':
           calculateAge(employee?.employee?.dob) > 60
-            ? Math.round(0).toFixed(2)
+            ? Math.round(0)
             : calculateTotal(employee) >= 15000
-            ? Math.round(15000).toFixed(2)
-            : Math.round(calculateTotal(employee)).toFixed(2),
+            ? 15000
+            : Math.round(calculateTotal(employee)),
         'EDLI Wages':
           calculateTotal(employee) >= 15000
-            ? Math.round(15000).toFixed(2)
-            : Math.round(calculateTotal(employee)).toFixed(2),
-        PF: Math.round(calculateTotal(employee) * 0.12).toFixed(2),
+            ? Math.round(15000)
+            : Math.round(calculateTotal(employee)),
+        PF: Math.round(calculateTotal(employee) * 0.12),
         'EPF Amount':
           calculateAge(employee?.employee?.dob) > 60
-            ? Math.round(0).toFixed(2)
+            ? Math.round(0)
             : calculateTotal(employee) > 15000
-            ? Math.round(1250).toFixed(2)
-            : Math.round(0.0833 * employee?.total).toFixed(2),
+            ? Math.round(1250)
+            : Math.round(0.0833 * employee?.total),
         'PPF Amount':
           calculateAge(employee?.employee?.dob) > 60
-            ? Math.round(0.12 * calculateTotal(employee)).toFixed(2)
+            ? Math.round(0.12 * calculateTotal(employee))
             : calculateTotal(employee) > 15000
-            ? Math.round(0.12 * calculateTotal(employee) - 1250).toFixed(2)
-            : Math.round(0.0367 * employee?.total).toFixed(2),
+            ? Math.round(0.12 * calculateTotal(employee) - 1250)
+            : Math.round(0.0367 * employee?.total),
         'NCP Days': calculateAbsentDays(employee) || 0,
         _: 0,
       };
