@@ -246,7 +246,7 @@ const Page = ({
                   <TableHead className='bg-slate-400 text-black border-2 border-black'>
                     IP Number (10 Digits)
                   </TableHead>
-             {/*  <TableHead className='bg-slate-400 text-black border-2 border-black'>
+                  {/* <TableHead className='bg-slate-400 text-black border-2 border-black'>
                     P.F. No.
                   </TableHead> */}
                   <TableHead className='bg-slate-400 text-black border-2 border-black'>
@@ -269,7 +269,7 @@ const Page = ({
                     <TableCell className='border-black border-2 text-black'>
                       {employee?.employee?.ESICNo}
                     </TableCell>
-{/*                     <TableCell className='border-black border-2 text-black'>
+                    {/* <TableCell className='border-black border-2 text-black'>
                       {employee?.employee?.pfNo}
                     </TableCell> */}
                     <TableCell className='border-black border-2 text-black'>
