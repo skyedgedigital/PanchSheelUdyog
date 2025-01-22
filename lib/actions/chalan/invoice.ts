@@ -515,7 +515,7 @@ const generateContinuousTaxInvoiceNumber = async (): Promise<
       return {
         success: false,
         status: 200,
-        message: 'Failed to generate next tax invoice number, Please try later',
+        message: 'Failed to generate next invoice number, Please try later',
         data: null,
         error: null,
       };
