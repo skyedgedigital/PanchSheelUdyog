@@ -33,10 +33,9 @@ import { getYearForInvoiceNaming } from '@/utils/getYearForInvoiceNaming';
 
 const todayDate = () => {
   let date = new Date().toLocaleDateString();
-  let x = date.split('/');
-  // return `${x[0]}/${x[1]}/${x[2]}`;
   return date;
 };
+
 const Invoice = ({
   // invoice,
   items,
