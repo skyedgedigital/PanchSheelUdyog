@@ -1,18 +1,22 @@
-import mongoose,{Schema} from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
-interface ISiteMaster { 
-    name:string;
+interface ISiteMaster {
+  name: string;
 }
 
-const SiteMasterSchema:mongoose.Schema<ISiteMaster> = new Schema({
-    name:{
-        type:String,
-        required:true
+const SiteMasterSchema: mongoose.Schema<ISiteMaster> = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-})
+  },
+  { timestamps: true },
+);
 
-const Site : mongoose.Model<ISiteMaster> = mongoose.models.Site || mongoose.model("Site",SiteMasterSchema)
+const Site: mongoose.Model<ISiteMaster> =
+  mongoose.models.Site || mongoose.model('Site', SiteMasterSchema);
 
-export default Site
+export default Site;
 
-export {SiteMasterSchema}
+export { SiteMasterSchema };

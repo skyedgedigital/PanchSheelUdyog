@@ -1,33 +1,38 @@
-import mongoose , {Schema} from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
 interface IEsiLocation {
-    name:string;
-    address:string;
-    EsiNo:string;
-    branch:string;
+  name: string;
+  address: string;
+  EsiNo: string;
+  branch: string;
 }
 
-const EsiLocationSchema:mongoose.Schema<IEsiLocation> = new Schema({
-    name:{
-        type:String,
-        required:true,
+const EsiLocationSchema: mongoose.Schema<IEsiLocation> = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-    address:{
-        type:String,
-        required:true,
+    address: {
+      type: String,
+      required: true,
     },
-    EsiNo:{
-        type:String,
-        required:true,
+    EsiNo: {
+      type: String,
+      required: true,
     },
-    branch:{
-        type:String,
-        required:true,
-    }
-})
+    branch: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true },
+);
 
-const EsiLocation : mongoose.Model<IEsiLocation> = mongoose.models.EsiLocation || mongoose.model("EsiLocation",EsiLocationSchema)
+const EsiLocation: mongoose.Model<IEsiLocation> =
+  mongoose.models.EsiLocation ||
+  mongoose.model('EsiLocation', EsiLocationSchema);
 
-export default EsiLocation
+export default EsiLocation;
 
-export {EsiLocationSchema}
+export { EsiLocationSchema };
